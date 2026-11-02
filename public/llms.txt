@@ -1,0 +1,27 @@
+# HallwaySync
+
+> Real-Time In-Person & Hybrid Tech Event Networking and Team Formation application powered by Supabase Realtime, PostgreSQL, React 18, and TypeScript.
+
+HallwaySync bridges the physical hallway track at hackathons, developer conferences, and builder summits with frictionless digital team formation. Organizers project a dynamic stage QR code. In-person attendees scan with their smartphone cameras to onboard in under 45 seconds without downloading an app or creating a password. Attendees discover complementary teammates, send reciprocal connection waves, scan physical badges, and unlock direct contact handles (Telegram, LinkedIn) upon mutual connection.
+
+## Core Capabilities & Endpoints
+
+- [HallwaySync Live App](https://vite.sharukhtech.com/): Instant room creation and live event networking hall.
+- [GitHub Repository](https://github.com/shaikhsharukh/HallwaySync): Complete open source codebase, PostgreSQL schemas, and real-time event protocols.
+- [Robots Policy](https://vite.sharukhtech.com/robots.txt): Crawler and agent indexation guidelines.
+- [Sitemap](https://vite.sharukhtech.com/sitemap.xml): Primary canonical search index.
+
+## Key Features
+
+- **Instant Room Creation**: Organizers launch networking halls in 1 click with quickstart presets (Hackathon, Cloud Summit, Builders Meetup).
+- **Stage & Projector Presentation Mode**: High-contrast, projection-optimized QR code display with live attendee counters.
+- **45-Second Onboarding**: Anonymous Supabase authentication with 3-step profile setup (Identity, Skills, Intent).
+- **Privacy-First Asymmetric Reveal**: Contact handles remain confidential until mutual reciprocal waves or camera badge scans occur.
+- **Physical QR Badge Scanner**: Mobile camera scanner supporting the `hallwaysync:badge:` handshake protocol.
+- **Organizer Live Command Center**: Real-time demographic charts, live attendee moderation, and instant stage announcement broadcasts.
+
+## Tech Stack & Architecture
+
+- **Frontend**: React 18, TypeScript, Vite, Tailwind CSS, Lucide React
+- **Backend**: Supabase (PostgreSQL 15, Row-Level Security, Security Definer RPCs)
+- **Realtime**: Supabase Realtime Channels (Broadcast announcements and presence radar)

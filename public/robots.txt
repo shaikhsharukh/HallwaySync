@@ -1,7 +1,35 @@
 # HallwaySync Event Networking Robots.txt
 # https://www.robotstxt.org/robotstxt.html
+
+# Global Search Engine Crawlers
 User-agent: *
 Allow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 
-# Sitemap Pointer
+# AI Search & Citation Agents (Allowed for real-time search & citation indexing)
+User-agent: GPTBot
+Allow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+
+User-agent: PerplexityBot
+Allow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+
+User-agent: ClaudeBot
+Allow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+
+User-agent: Claude-User
+Allow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+
+User-agent: Google-Extended
+Allow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+
+User-agent: Applebot-Extended
+Allow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+
+# Sitemap & LLM Specification Pointers
 Sitemap: https://vite.sharukhtech.com/sitemap.xml

@@ -43,6 +43,20 @@
     <meta name="twitter:image" content="https://vite.sharukhtech.com/og-image.svg" />
     <meta name="twitter:image:alt" content="HallwaySync Real-Time In-Person Event Networking" />
 
+    <!-- Speculation Rules & Preload Optimizations -->
+    <script type="speculationrules">
+    {
+      "prerender": [
+        {
+          "source": "list",
+          "urls": ["/"],
+          "eagerness": "immediate"
+        }
+      ]
+    }
+    </script>
+    <link rel="preload" href="/favicon.svg" as="image" type="image/svg+xml" />
+
     <!-- Schema.org JSON-LD Structured Data -->
     <script type="application/ld+json">
     {
@@ -80,6 +94,36 @@
           "name": "HallwaySync",
           "url": "https://vite.sharukhtech.com/",
           "logo": "https://vite.sharukhtech.com/favicon.svg"
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://vite.sharukhtech.com/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How do attendees join a HallwaySync networking room?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Attendees scan the dynamic stage or venue QR code using their native smartphone camera. They complete a 45-second 3-step onboarding profile with zero app downloads or account creation required."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is attendee contact information private?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Contact handles such as Telegram, LinkedIn, and GitHub are strictly protected by asymmetric reveal and are only unlocked upon mutual reciprocal waves or physical camera badge scanning."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What tools are available for hackathon and conference organizers?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Organizers have access to a Stage Projector Presentation Mode, live demographic analytics (roles, skills, team intents), attendee moderation controls, real-time stage announcement broadcasts, and 1-click sanitized CSV export."
+              }
+            }
+          ]
         }
       ]
     }
@@ -127,7 +171,59 @@
     </style>
   </head>
   <body class="bg-surface-base text-slate-100 min-h-screen">
-    <div id="root"></div>
+    <div id="root">
+      <!-- Pre-rendered Semantic Content for Search Engine Crawlers & Non-JS Clients -->
+      <header style="padding: 1.5rem; border-bottom: 1px solid #1f2937; max-width: 64rem; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <span style="font-size: 1.5rem;">⚡</span>
+          <div>
+            <strong style="color: #f8fafc; font-size: 1.125rem;">HallwaySync</strong>
+            <span style="color: #94a3b8; font-size: 0.75rem; display: block;">Real-Time Event Networking</span>
+          </div>
+        </div>
+        <a href="https://github.com/shaikhsharukh/HallwaySync" style="color: #3ECF8E; text-decoration: none; font-size: 0.875rem; font-weight: 600;">GitHub Source</a>
+      </header>
+
+      <main style="max-width: 48rem; margin: 2rem auto; padding: 0 1rem; text-align: center;">
+        <h1 style="font-size: 2.25rem; font-weight: 800; color: #f8fafc; line-height: 1.25; margin-bottom: 1rem;">
+          Real-Time In-Person Event Networking &amp; Team Formation
+        </h1>
+        <p style="font-size: 1.125rem; color: #94a3b8; line-height: 1.6; max-width: 40rem; margin: 0 auto 2rem;">
+          Project a live dynamic QR code on stage. Attendees scan with their smartphone cameras to onboard in &lt;45 seconds—zero app downloads, zero account creation roadblocks.
+        </p>
+
+        <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; text-align: left; margin-bottom: 2rem;">
+          <article style="background: #14171f; border: 1px solid #1f2937; padding: 1.25rem; border-radius: 1rem;">
+            <h2 style="font-size: 1rem; font-weight: 700; color: #3ECF8E; margin-bottom: 0.5rem;">1. Project QR on Stage</h2>
+            <p style="font-size: 0.875rem; color: #94a3b8; line-height: 1.5;">Display high-contrast projector-ready QR codes on venue screens or registration desks.</p>
+          </article>
+          <article style="background: #14171f; border: 1px solid #1f2937; padding: 1.25rem; border-radius: 1rem;">
+            <h2 style="font-size: 1rem; font-weight: 700; color: #38bdf8; margin-bottom: 0.5rem;">2. &lt;45s Phone Onboard</h2>
+            <p style="font-size: 0.875rem; color: #94a3b8; line-height: 1.5;">Attendees select technical role, stack tags, and team intent in 3 rapid steps via anonymous authentication.</p>
+          </article>
+          <article style="background: #14171f; border: 1px solid #1f2937; padding: 1.25rem; border-radius: 1rem;">
+            <h2 style="font-size: 1rem; font-weight: 700; color: #10b981; margin-bottom: 0.5rem;">3. Connect &amp; Moderate</h2>
+            <p style="font-size: 0.875rem; color: #94a3b8; line-height: 1.5;">Reciprocal waves unlock contact handles on mutual match; organizers broadcast live alerts and track demographics.</p>
+          </article>
+        </section>
+
+        <section style="background: #14171f; border: 1px solid #1f2937; padding: 1.5rem; border-radius: 1rem; text-align: left;">
+          <h2 style="font-size: 1.25rem; font-weight: 700; color: #f8fafc; margin-bottom: 1rem;">Frequently Asked Questions</h2>
+          <div style="margin-bottom: 1rem;">
+            <h3 style="font-size: 0.95rem; font-weight: 600; color: #3ECF8E; margin-bottom: 0.25rem;">How do attendees join a HallwaySync room?</h3>
+            <p style="font-size: 0.875rem; color: #94a3b8; line-height: 1.5;">Attendees point their native camera at the stage projector screen to open the web room immediately. No app store installation or password signup is required.</p>
+          </div>
+          <div style="margin-bottom: 1rem;">
+            <h3 style="font-size: 0.95rem; font-weight: 600; color: #3ECF8E; margin-bottom: 0.25rem;">Is participant contact information private?</h3>
+            <p style="font-size: 0.875rem; color: #94a3b8; line-height: 1.5;">Yes. Contact handles (Telegram, LinkedIn, GitHub) are strictly hidden until two attendees mutually send connection waves or scan physical badge QR codes.</p>
+          </div>
+          <div>
+            <h3 style="font-size: 0.95rem; font-weight: 600; color: #3ECF8E; margin-bottom: 0.25rem;">What features are available for hackathon organizers?</h3>
+            <p style="font-size: 0.875rem; color: #94a3b8; line-height: 1.5;">Organizers get an operational command center with real-time demographic charts, live attendee moderation, broadcast stage announcements, and CSV export.</p>
+          </div>
+        </section>
+      </main>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
