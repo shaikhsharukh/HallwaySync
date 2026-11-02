@@ -1,0 +1,20 @@
+{
+  "short_name": "HackBuild",
+  "name": "HackBuild — Real-Time In-Person Event Networking & Team Formation",
+  "description": "Instant in-person tech event networking, 45-second onboarding, QR code badge scanner, and real-time team matching powered by Supabase.",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0c0e12",
+  "theme_color": "#0c0e12",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "categories": ["social", "business", "productivity", "utilities"],
+  "lang": "en"
+}

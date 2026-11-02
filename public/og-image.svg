@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c0e12" />
+      <stop offset="50%" stop-color="#141820" />
+      <stop offset="100%" stop-color="#090b0e" />
+    </linearGradient>
+    <linearGradient id="emerald-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3ECF8E" />
+      <stop offset="100%" stop-color="#10B981" />
+    </linearGradient>
+    <linearGradient id="glow-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3ECF8E" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#3ECF8E" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg-grad)" />
+  
+  <!-- Subtle Grid Lines -->
+  <g stroke="#1f293d" stroke-width="1" opacity="0.3">
+    <line x1="0" y1="105" x2="1200" y2="105" />
+    <line x1="0" y1="210" x2="1200" y2="210" />
+    <line x1="0" y1="315" x2="1200" y2="315" />
+    <line x1="0" y1="420" x2="1200" y2="420" />
+    <line x1="0" y1="525" x2="1200" y2="525" />
+    <line x1="200" y1="0" x2="200" y2="630" />
+    <line x1="400" y1="0" x2="400" y2="630" />
+    <line x1="600" y1="0" x2="600" y2="630" />
+    <line x1="800" y1="0" x2="800" y2="630" />
+    <line x1="1000" y1="0" x2="1000" y2="630" />
+  </g>
+
+  <!-- Top Ambient Glow -->
+  <circle cx="600" cy="80" r="320" fill="url(#glow-grad)" />
+
+  <!-- Badge Pill -->
+  <g transform="translate(100, 100)">
+    <rect width="360" height="42" rx="21" fill="#1b2432" stroke="#3ECF8E" stroke-opacity="0.4" stroke-width="1.5" />
+    <circle cx="24" cy="21" r="5" fill="#3ECF8E" />
+    <text x="38" y="27" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif" font-size="15" font-weight="700" fill="#3ECF8E" letter-spacing="1">INSTANT IN-PERSON NETWORKING</text>
+  </g>
+
+  <!-- Main Headline -->
+  <text x="100" y="230" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif" font-size="64" font-weight="800" fill="#FFFFFF" letter-spacing="-1.5">
+    HackBuild <tspan fill="url(#emerald-grad)">Event Socializer</tspan>
+  </text>
+
+  <!-- Subheadline -->
+  <text x="100" y="295" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif" font-size="28" font-weight="500" fill="#94A3B8">
+    Zero-friction 45s onboarding • Live QR Badge Scans • AI Team Formation
+  </text>
+
+  <!-- Features Row -->
+  <g transform="translate(100, 360)">
+    <!-- Feature 1 -->
+    <rect x="0" y="0" width="310" height="150" rx="16" fill="#131720" stroke="#252f42" stroke-width="1.5" />
+    <text x="24" y="44" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="28">⚡</text>
+    <text x="64" y="44" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="18" font-weight="700" fill="#F8FAFC">Instant Room Setup</text>
+    <text x="24" y="80" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="14" fill="#94A3B8">Zero signups required. Host</text>
+    <text x="24" y="104" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="14" fill="#94A3B8">launches rooms in 1 click.</text>
+
+    <!-- Feature 2 -->
+    <rect x="340" y="0" width="310" height="150" rx="16" fill="#131720" stroke="#252f42" stroke-width="1.5" />
+    <text x="364" y="44" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="28">📱</text>
+    <text x="404" y="44" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="18" font-weight="700" fill="#F8FAFC">QR Badge Scanner</text>
+    <text x="364" y="80" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="14" fill="#94A3B8">Tap phones or scan physical</text>
+    <text x="364" y="104" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="14" fill="#94A3B8">badges to connect on the spot.</text>
+
+    <!-- Feature 3 -->
+    <rect x="680" y="0" width="310" height="150" rx="16" fill="#131720" stroke="#252f42" stroke-width="1.5" />
+    <text x="704" y="44" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="28">🤝</text>
+    <text x="744" y="44" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="18" font-weight="700" fill="#F8FAFC">Match &amp; Form Teams</text>
+    <text x="704" y="80" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="14" fill="#94A3B8">Real-time complementary skill</text>
+    <text x="704" y="104" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="14" fill="#94A3B8">scoring &amp; reciprocal waves.</text>
+  </g>
+
+  <!-- Footer Brand -->
+  <g transform="translate(100, 560)">
+    <text x="0" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="16" font-weight="600" fill="#64748B">
+      Powered by Supabase Realtime &amp; PostgreSQL • Built for Hackathons &amp; Summits
+    </text>
+    <text x="1000" y="24" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="16" font-weight="600" fill="#3ECF8E">
+      vite.sharukhtech.com
+    </text>
+  </g>
+</svg>
