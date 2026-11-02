@@ -3,7 +3,9 @@
 > **Real-Time In-Person & Hybrid Tech Event Networking and Team Formation**  
 > Powered by **Supabase Realtime**, **PostgreSQL**, **React 18**, **TypeScript**, and **Tailwind CSS**.
 
-🌐 **Live Demo**: [https://hallway-sync.sharukhtech.com/](https://hallway-sync.sharukhtech.com/)
+🌐 **Live Demo**: [https://hallway-sync.sharukhtech.com/](https://hallway-sync.sharukhtech.com/)  
+[![Vercel Deployment](https://img.shields.io/badge/Vercel-Deployed-000000?style=flat&logo=vercel&logoColor=white)](https://hallway-sync.sharukhtech.com/)
+[![Supabase Realtime](https://img.shields.io/badge/Supabase-Realtime-3ECF8E?style=flat&logo=supabase&logoColor=white)](https://supabase.com)
 
 ---
 
