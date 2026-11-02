@@ -44,7 +44,7 @@
 
   <!-- Main Headline -->
   <text x="100" y="230" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif" font-size="64" font-weight="800" fill="#FFFFFF" letter-spacing="-1.5">
-    HackBuild <tspan fill="url(#emerald-grad)">Event Socializer</tspan>
+    HallwaySync <tspan fill="url(#emerald-grad)">Event Networking</tspan>
   </text>
 
   <!-- Subheadline -->

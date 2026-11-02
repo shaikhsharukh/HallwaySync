@@ -1,6 +1,6 @@
 {
-  "short_name": "HackBuild",
-  "name": "HackBuild — Real-Time In-Person Event Networking & Team Formation",
+  "short_name": "HallwaySync",
+  "name": "HallwaySync — Real-Time In-Person Event Networking & Team Formation",
   "description": "Instant in-person tech event networking, 45-second onboarding, QR code badge scanner, and real-time team matching powered by Supabase.",
   "icons": [
     {

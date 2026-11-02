@@ -23,8 +23,8 @@ export const MyBadgeModal: React.FC<MyBadgeModalProps> = ({
   if (!isOpen || !attendee) return null;
 
   const roleColor = getRoleColor(attendee.role);
-  // Special URI payload encoded in QR badge
-  const badgePayload = `hackbuild:badge:${roomId}:${attendee.id}`;
+  // Special URI payload encoded in QR badge (supports HallwaySync protocol)
+  const badgePayload = `hallwaysync:badge:${roomId}:${attendee.id}`;
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} className="text-center">

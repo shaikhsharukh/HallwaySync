@@ -49,8 +49,8 @@ export const QRBadgeScanner: React.FC<QRBadgeScannerProps> = ({
             qrbox: { width: 220, height: 220 },
           },
           (decodedText) => {
-            // Verify format: hackbuild:badge:{roomId}:{attendeeId}
-            if (decodedText.startsWith('hackbuild:badge:')) {
+            // Verify format: hallwaysync:badge:{roomId}:{attendeeId} or legacy hackbuild:badge:
+            if (decodedText.startsWith('hallwaysync:badge:') || decodedText.startsWith('hackbuild:badge:')) {
               const parts = decodedText.split(':');
               const badgeOwnerId = parts[3];
 

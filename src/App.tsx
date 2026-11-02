@@ -82,20 +82,20 @@ export default function App() {
 
   // Dynamic SEO Page Title & Meta Updates
   useEffect(() => {
-    let title = 'HackBuild — Real-Time In-Person Event Networking & Team Formation | Supabase';
+    let title = 'HallwaySync — Real-Time In-Person Event Networking & Team Formation | Supabase';
     let description =
       'Instant in-person tech event networking, frictionless 45-second onboarding, live QR badge scanner, real-time presence, and AI team matching for hackathons and builder summits.';
 
     if (view === 'create') {
-      title = 'HackBuild — Real-Time In-Person Event Networking & Team Formation | Supabase';
+      title = 'HallwaySync — Real-Time In-Person Event Networking & Team Formation | Supabase';
     } else if (view === 'lobby') {
-      title = `${room?.title || 'Event Lobby'} • Room Entry & QR Pass | HackBuild`;
+      title = `${room?.title || 'Event Lobby'} • Room Entry & QR Pass | HallwaySync`;
       if (room?.description) description = room.description;
     } else if (view === 'onboard') {
-      title = `Join ${room?.title || 'Event'} • 45s Badge Setup | HackBuild`;
+      title = `Join ${room?.title || 'Event'} • 45s Badge Setup | HallwaySync`;
       if (room?.description) description = `Join ${room.title} networking directory in 45 seconds.`;
     } else if (view === 'dashboard') {
-      title = `Organizer Command Center • ${room?.title || 'Event Dashboard'} | HackBuild`;
+      title = `Organizer Command Center • ${room?.title || 'Event Dashboard'} | HallwaySync`;
     } else if (view === 'room') {
       const tabName =
         activeTab === 'directory'
@@ -103,7 +103,7 @@ export default function App() {
           : activeTab === 'matches'
           ? 'Team Matchmaker'
           : 'My Connections';
-      title = `${tabName} • ${room?.title || 'Event Hall'} | HackBuild`;
+      title = `${tabName} • ${room?.title || 'Event Hall'} | HallwaySync`;
     }
 
     document.title = title;
@@ -372,10 +372,10 @@ export default function App() {
             </div>
             <div>
               <h1 className="text-sm font-bold tracking-tight text-slate-100 leading-none">
-                HackBuild
+                HallwaySync
               </h1>
               <span className="text-[10px] text-slate-400 font-mono">
-                Event Socializer
+                Event Networking
               </span>
             </div>
           </div>
