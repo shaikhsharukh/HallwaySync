@@ -32,4 +32,4 @@ Allow: /
 Content-Signal: search=yes, ai-input=yes, ai-train=no
 
 # Sitemap & LLM Specification Pointers
-Sitemap: https://vite.sharukhtech.com/sitemap.xml
+Sitemap: https://hallway-sync.sharukhtech.com/sitemap.xml

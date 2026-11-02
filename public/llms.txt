@@ -6,10 +6,10 @@ HallwaySync bridges the physical hallway track at hackathons, developer conferen
 
 ## Core Capabilities & Endpoints
 
-- [HallwaySync Live App](https://vite.sharukhtech.com/): Instant room creation and live event networking hall.
+- [HallwaySync Live App](https://hallway-sync.sharukhtech.com/): Instant room creation and live event networking hall.
 - [GitHub Repository](https://github.com/shaikhsharukh/HallwaySync): Complete open source codebase, PostgreSQL schemas, and real-time event protocols.
-- [Robots Policy](https://vite.sharukhtech.com/robots.txt): Crawler and agent indexation guidelines.
-- [Sitemap](https://vite.sharukhtech.com/sitemap.xml): Primary canonical search index.
+- [Robots Policy](https://hallway-sync.sharukhtech.com/robots.txt): Crawler and agent indexation guidelines.
+- [Sitemap](https://hallway-sync.sharukhtech.com/sitemap.xml): Primary canonical search index.
 
 ## Key Features
 

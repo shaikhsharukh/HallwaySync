@@ -3,7 +3,7 @@
 > **Real-Time In-Person & Hybrid Tech Event Networking and Team Formation**  
 > Powered by **Supabase Realtime**, **PostgreSQL**, **React 18**, **TypeScript**, and **Tailwind CSS**.
 
-🌐 **Live Demo**: [https://vite.sharukhtech.com/](https://vite.sharukhtech.com/)
+🌐 **Live Demo**: [https://hallway-sync.sharukhtech.com/](https://hallway-sync.sharukhtech.com/)
 
 ---
 
