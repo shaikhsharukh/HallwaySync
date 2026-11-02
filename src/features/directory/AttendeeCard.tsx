@@ -4,7 +4,7 @@ import { AvatarBadge } from '../../components/AvatarBadge';
 import { Badge } from '../../components/ui/badge';
 import { Button } from '../../components/ui/button';
 import { getRoleColor } from '../../lib/utils';
-import { HandMetal, MapPin, Check, Sparkles } from 'lucide-react';
+import { HandMetal, MapPin, Check, Sparkles, Pencil } from 'lucide-react';
 
 export interface AttendeeCardProps {
   attendee: Attendee;
@@ -12,6 +12,7 @@ export interface AttendeeCardProps {
   connectionStatus?: 'pending' | 'connected' | 'none';
   onCardClick: () => void;
   onWaveClick?: () => void;
+  onEditProfile?: () => void;
 }
 
 export const AttendeeCard: React.FC<AttendeeCardProps> = ({
@@ -20,6 +21,7 @@ export const AttendeeCard: React.FC<AttendeeCardProps> = ({
   connectionStatus = 'none',
   onCardClick,
   onWaveClick,
+  onEditProfile,
 }) => {
   const roleColor = getRoleColor(attendee.role);
 
@@ -29,7 +31,7 @@ export const AttendeeCard: React.FC<AttendeeCardProps> = ({
       className="group relative bg-surface-card border border-surface-border hover:border-surface-highlight hover:bg-surface-raised rounded-2xl p-4 sm:p-5 transition-all duration-200 cursor-pointer shadow-card flex flex-col justify-between"
     >
       <div>
-        {/* Top Header: Avatar + Identity + Wave Button */}
+        {/* Top Header: Avatar + Identity + Wave / Edit Button */}
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-3 min-w-0">
             <AvatarBadge
@@ -45,7 +47,7 @@ export const AttendeeCard: React.FC<AttendeeCardProps> = ({
                   {attendee.display_name}
                 </h3>
                 {isSelf && (
-                  <span className="text-[10px] font-mono uppercase px-1.5 py-0.5 rounded bg-brand-500/20 text-brand-300 font-semibold">
+                  <span className="text-xs font-mono uppercase px-1.5 py-0.5 rounded bg-brand-500/20 text-brand-300 font-semibold">
                     You
                   </span>
                 )}
@@ -63,6 +65,28 @@ export const AttendeeCard: React.FC<AttendeeCardProps> = ({
               </div>
             </div>
           </div>
+
+          {/* Self Action: Edit Profile */}
+          {isSelf && onEditProfile && (
+            <div
+              onClick={(e) => {
+                e.stopPropagation();
+                onEditProfile();
+              }}
+              className="shrink-0"
+            >
+              <Button
+                type="button"
+                size="sm"
+                variant="ghost"
+                className="min-h-[44px] px-3 border border-surface-border hover:bg-surface-raised text-slate-300 hover:text-white"
+                title="Edit your badge & profile"
+              >
+                <Pencil className="w-3.5 h-3.5 text-brand-400 mr-1" />
+                <span>Edit</span>
+              </Button>
+            </div>
+          )}
 
           {/* Action Button: Wave or Connected */}
           {!isSelf && onWaveClick && (
@@ -99,7 +123,7 @@ export const AttendeeCard: React.FC<AttendeeCardProps> = ({
 
         {/* Micro-Location Zone */}
         {attendee.current_zone && (
-          <div className="flex items-center gap-1 text-[11px] text-slate-400 mt-2.5">
+          <div className="flex items-center gap-1 text-xs text-slate-400 mt-2.5">
             <MapPin className="w-3.5 h-3.5 text-slate-400" />
             <span className="truncate">{attendee.current_zone}</span>
           </div>
@@ -119,7 +143,7 @@ export const AttendeeCard: React.FC<AttendeeCardProps> = ({
           {attendee.skills.slice(0, 3).map((skill) => (
             <span
               key={skill}
-              className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-surface-raised border border-surface-border text-slate-300"
+              className="text-xs font-medium px-2 py-0.5 rounded-md bg-surface-raised border border-surface-border text-slate-300"
             >
               {skill}
             </span>

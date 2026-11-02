@@ -25,7 +25,7 @@ export const Toast: React.FC<ToastProps> = ({ toast, onDismiss }) => {
     success: <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />,
     error: <AlertCircle className="w-5 h-5 text-rose-400 shrink-0" />,
     info: <Info className="w-5 h-5 text-sky-400 shrink-0" />,
-    wave: <HandMetal className="w-5 h-5 text-brand-400 shrink-0 animate-bounce" />,
+    wave: <HandMetal className="w-5 h-5 text-brand-400 shrink-0 animate-pulse" />,
   };
 
   return (

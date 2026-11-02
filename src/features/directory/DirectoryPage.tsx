@@ -12,6 +12,7 @@ export interface DirectoryPageProps {
   currentAttendee: Attendee | null;
   connections: Record<string, 'pending' | 'connected' | 'none'>;
   onSendWave: (recipientId: string) => Promise<void>;
+  onEditProfile?: () => void;
   onRefresh?: () => void;
   isLoading?: boolean;
 }
@@ -21,6 +22,7 @@ export const DirectoryPage: React.FC<DirectoryPageProps> = ({
   currentAttendee,
   connections,
   onSendWave,
+  onEditProfile,
   onRefresh,
   isLoading,
 }) => {
@@ -115,6 +117,7 @@ export const DirectoryPage: React.FC<DirectoryPageProps> = ({
                 connectionStatus={status}
                 onCardClick={() => setSelectedAttendee(attendee)}
                 onWaveClick={() => onSendWave(attendee.id)}
+                onEditProfile={onEditProfile}
               />
             );
           })}

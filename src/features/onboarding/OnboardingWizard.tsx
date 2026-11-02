@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
 import { ProfessionalRole } from '../../types/database';
-import { AttendeeProfileInput } from '../../types/models';
+import { Attendee, AttendeeProfileInput } from '../../types/models';
 import { getRoleColor } from '../../lib/utils';
 import { ArrowRight, ArrowLeft, Check, Sparkles, User, Code2, Target } from 'lucide-react';
 
 export interface OnboardingWizardProps {
   roomTitle: string;
   roomCategory: string;
+  initialProfile?: Attendee | null;
+  onCancel?: () => void;
   onComplete: (profile: AttendeeProfileInput) => Promise<void>;
 }
 
@@ -50,20 +52,23 @@ const INTENTS = [
 export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({
   roomTitle,
   roomCategory,
+  initialProfile,
+  onCancel,
   onComplete,
 }) => {
+  const isEditing = Boolean(initialProfile);
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Form State
-  const [displayName, setDisplayName] = useState('');
-  const [role, setRole] = useState<ProfessionalRole>('Fullstack');
-  const [headline, setHeadline] = useState('');
-  const [skills, setSkills] = useState<string[]>(['TypeScript', 'React']);
+  const [displayName, setDisplayName] = useState(initialProfile?.display_name || '');
+  const [role, setRole] = useState<ProfessionalRole>(initialProfile?.role || 'Fullstack');
+  const [headline, setHeadline] = useState(initialProfile?.headline || '');
+  const [skills, setSkills] = useState<string[]>(initialProfile?.skills || ['TypeScript', 'React']);
   const [customSkill, setCustomSkill] = useState('');
-  const [intent, setIntent] = useState<string[]>(['Looking for Team']);
-  const [contactHandle, setContactHandle] = useState('');
-  const [avatarGithub, setAvatarGithub] = useState('');
+  const [intent, setIntent] = useState<string[]>(initialProfile?.intent || ['Looking for Team']);
+  const [contactHandle, setContactHandle] = useState(initialProfile?.contact_handle || '');
+  const [avatarGithub, setAvatarGithub] = useState(initialProfile?.avatar_github || '');
 
   // Validation
   const [error, setError] = useState<string | null>(null);
@@ -138,11 +143,11 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({
       {/* Header & Step Dots */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <span className="text-[11px] font-mono uppercase tracking-wider text-brand-400 font-semibold">
-            {roomCategory} Join Wizard
+          <span className="text-xs font-mono uppercase tracking-wider text-brand-400 font-semibold">
+            {isEditing ? 'Profile Editor' : `${roomCategory} Join Wizard`}
           </span>
           <h2 className="text-xl font-bold text-slate-100 mt-0.5 truncate max-w-[260px]">
-            {roomTitle}
+            {isEditing ? 'Edit Your Badge' : roomTitle}
           </h2>
         </div>
         <div className="flex items-center gap-1.5" aria-label={`Step ${step} of 3`}>
@@ -222,10 +227,17 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({
             maxLength={80}
           />
 
-          <Button onClick={handleNext} className="w-full mt-2">
-            Continue to Skills
-            <ArrowRight className="w-4 h-4" />
-          </Button>
+          <div className="flex items-center gap-3 pt-2">
+            {isEditing && onCancel && (
+              <Button type="button" variant="ghost" onClick={onCancel} className="min-h-[44px]">
+                Cancel
+              </Button>
+            )}
+            <Button onClick={handleNext} className="flex-1 min-h-[44px]">
+              Continue to Skills
+              <ArrowRight className="w-4 h-4 ml-1" />
+            </Button>
+          </div>
         </div>
       )}
 
@@ -350,8 +362,8 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({
               isLoading={isSubmitting}
               className="flex-1 min-h-[44px]"
             >
-              <Sparkles className="w-4 h-4" />
-              Enter Live Room
+              <Sparkles className="w-4 h-4 mr-1" />
+              {isEditing ? 'Save Profile Changes' : 'Enter Live Room'}
             </Button>
           </div>
         </div>

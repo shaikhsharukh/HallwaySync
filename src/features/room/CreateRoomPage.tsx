@@ -139,11 +139,11 @@ export const CreateRoomPage: React.FC<CreateRoomPageProps> = ({ onRoomCreated })
           <div className="w-7 h-7 rounded-xl bg-brand-500/10 border border-brand-500/30 flex items-center justify-center text-brand-400 font-bold text-xs">
             1
           </div>
-          <h3 className="text-xs font-bold text-slate-200 flex items-center gap-1.5">
+          <h2 className="text-xs font-bold text-slate-200 flex items-center gap-1.5">
             <QrCode className="w-3.5 h-3.5 text-brand-400" />
             Project QR on Stage
-          </h3>
-          <p className="text-[11px] text-slate-400 leading-relaxed">
+          </h2>
+          <p className="text-xs text-slate-400 leading-relaxed">
             Create your room and display the dynamic QR code on screen or venue banners.
           </p>
         </div>
@@ -152,24 +152,24 @@ export const CreateRoomPage: React.FC<CreateRoomPageProps> = ({ onRoomCreated })
           <div className="w-7 h-7 rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-400 font-bold text-xs">
             2
           </div>
-          <h3 className="text-xs font-bold text-slate-200 flex items-center gap-1.5">
+          <h2 className="text-xs font-bold text-slate-200 flex items-center gap-1.5">
             <Zap className="w-3.5 h-3.5 text-sky-400" />
             &lt;45s Phone Onboard
-          </h3>
-          <p className="text-[11px] text-slate-400 leading-relaxed">
+          </h2>
+          <p className="text-xs text-slate-400 leading-relaxed">
             Attendees scan to pick role, skills & intent. Zero app install or account creation.
           </p>
         </div>
 
         <div className="p-4 bg-surface-card border border-surface-border rounded-2xl space-y-1.5 shadow-sm">
-          <div className="w-7 h-7 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-bold text-xs">
+          <div className="w-7 h-7 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold text-xs">
             3
           </div>
-          <h3 className="text-xs font-bold text-slate-200 flex items-center gap-1.5">
-            <BarChart3 className="w-3.5 h-3.5 text-purple-400" />
+          <h2 className="text-xs font-bold text-slate-200 flex items-center gap-1.5">
+            <BarChart3 className="w-3.5 h-3.5 text-emerald-400" />
             Connect & Moderate
-          </h3>
-          <p className="text-[11px] text-slate-400 leading-relaxed">
+          </h2>
+          <p className="text-xs text-slate-400 leading-relaxed">
             Attendees swap contacts via waves; organizers track live stats & broadcast stage alerts.
           </p>
         </div>
@@ -271,7 +271,7 @@ export const CreateRoomPage: React.FC<CreateRoomPageProps> = ({ onRoomCreated })
       </form>
 
       {/* FEATURE PILLARS FOOTER */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-[11px] text-slate-400 pt-2">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-xs text-slate-400 pt-2">
         <div className="p-2.5 rounded-xl bg-surface-card/40 border border-surface-border/50">
           <ShieldCheck className="w-4 h-4 text-brand-400 mx-auto mb-1" />
           <span className="font-semibold text-slate-300 block">Privacy-First</span>
@@ -288,7 +288,7 @@ export const CreateRoomPage: React.FC<CreateRoomPageProps> = ({ onRoomCreated })
           <span>Proximity radar & auto-expiring status</span>
         </div>
         <div className="p-2.5 rounded-xl bg-surface-card/40 border border-surface-border/50">
-          <BarChart3 className="w-4 h-4 text-purple-400 mx-auto mb-1" />
+          <BarChart3 className="w-4 h-4 text-brand-400 mx-auto mb-1" />
           <span className="font-semibold text-slate-300 block">Demographics</span>
           <span>Real-time charts & clean CSV export</span>
         </div>

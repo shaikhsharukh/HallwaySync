@@ -42,7 +42,7 @@ export const RoomLobbyPage: React.FC<RoomLobbyPageProps> = ({
               <span className="text-xs font-bold text-slate-100 uppercase tracking-wide">
                 Stage & Projector Presentation Mode
               </span>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-brand-500/20 text-brand-300 font-mono">
+              <span className="text-xs px-2 py-0.5 rounded-full bg-brand-500/20 text-brand-300 font-mono">
                 Host
               </span>
             </div>
@@ -98,11 +98,11 @@ export const RoomLobbyPage: React.FC<RoomLobbyPageProps> = ({
           <div className="p-4 bg-surface-card border border-surface-border rounded-2xl space-y-3">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <h4 className="text-xs font-bold text-slate-200 flex items-center gap-1.5">
+                <h2 className="text-xs font-bold text-slate-200 flex items-center gap-1.5">
                   <LayoutDashboard className="w-3.5 h-3.5 text-brand-400" />
                   Organizer Command Center
-                </h4>
-                <p className="text-[11px] text-slate-400 mt-0.5">
+                </h2>
+                <p className="text-xs text-slate-400 mt-0.5">
                   Live demographics, real-time stage announcements, participant moderation, and 1-click CSV export.
                 </p>
               </div>
@@ -117,13 +117,13 @@ export const RoomLobbyPage: React.FC<RoomLobbyPageProps> = ({
               </Button>
             </div>
 
-            <div className="grid grid-cols-3 gap-2 pt-1 text-[10px] text-slate-400 border-t border-surface-border/60">
+            <div className="grid grid-cols-3 gap-2 pt-1 text-xs text-slate-400 border-t border-surface-border/60">
               <div className="flex items-center gap-1">
                 <Megaphone className="w-3 h-3 text-brand-400" />
                 <span>Live Alerts</span>
               </div>
               <div className="flex items-center gap-1">
-                <BarChart2 className="w-3 h-3 text-purple-400" />
+                <BarChart2 className="w-3 h-3 text-emerald-400" />
                 <span>Demographics</span>
               </div>
               <div className="flex items-center gap-1">
@@ -136,7 +136,7 @@ export const RoomLobbyPage: React.FC<RoomLobbyPageProps> = ({
       </div>
 
       {/* FOOTER BADGES */}
-      <div className="flex flex-wrap items-center justify-center gap-4 text-[11px] text-slate-400 pt-2 border-t border-surface-border/60">
+      <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-slate-400 pt-2 border-t border-surface-border/60">
         <span className="flex items-center gap-1">
           <ShieldCheck className="w-3.5 h-3.5 text-brand-400" />
           <span>Anonymous Authentication</span>

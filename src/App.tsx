@@ -30,6 +30,7 @@ import {
   Link2,
   QrCode,
   LayoutDashboard,
+  Pencil,
 } from 'lucide-react';
 
 export default function App() {
@@ -245,12 +246,17 @@ export default function App() {
     const authUser = await ensureAnonymousUser();
     if (!authUser) throw new Error('Could not initialize anonymous session');
 
+    const isUpdate = Boolean(currentAttendee);
     const newAttendee = await onboardingService.joinRoom(room.id, authUser.id, profileInput);
     setCurrentAttendee(newAttendee);
     setAttendees((prev) => [...prev.filter((a) => a.id !== newAttendee.id), newAttendee]);
     setView('room');
-    setActiveTab('directory');
-    addToast('success', 'Joined room successfully!', 'Welcome to the networking hall.');
+    if (!isUpdate) {
+      setActiveTab('directory');
+      addToast('success', 'Joined room successfully!', 'Welcome to the networking hall.');
+    } else {
+      addToast('success', 'Profile updated!', 'Your updated badge is now live in the room.');
+    }
   };
 
   // Handle Wave Send
@@ -374,14 +380,76 @@ export default function App() {
               <h1 className="text-sm font-bold tracking-tight text-slate-100 leading-none">
                 HallwaySync
               </h1>
-              <span className="text-[10px] text-slate-400 font-mono">
+              <span className="text-xs text-slate-400 font-mono">
                 Event Networking
               </span>
             </div>
           </div>
 
+          {/* DESKTOP TOP NAVIGATION TABS */}
+          {room && view === 'room' && currentAttendee && (
+            <nav className="hidden md:flex items-center gap-1 bg-surface-card border border-surface-border p-1 rounded-2xl">
+              <button
+                type="button"
+                onClick={() => setActiveTab('directory')}
+                className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-colors ${
+                  activeTab === 'directory'
+                    ? 'text-brand-400 bg-brand-500/10'
+                    : 'text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                <Users className="w-4 h-4" />
+                <span>Directory</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab('matches')}
+                className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-colors ${
+                  activeTab === 'matches'
+                    ? 'text-brand-400 bg-brand-500/10'
+                    : 'text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                <Sparkles className="w-4 h-4" />
+                <span>Matches</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab('connections')}
+                className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-colors ${
+                  activeTab === 'connections'
+                    ? 'text-brand-400 bg-brand-500/10'
+                    : 'text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                <Link2 className="w-4 h-4" />
+                <span>Connections</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsBadgeModalOpen(true)}
+                className="px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 text-slate-400 hover:text-slate-200 transition-colors"
+              >
+                <QrCode className="w-4 h-4" />
+                <span>My Badge</span>
+              </button>
+            </nav>
+          )}
+
           {room && view === 'room' && (
             <div className="flex items-center gap-2">
+              {currentAttendee && (
+                <button
+                  type="button"
+                  onClick={() => setView('onboard')}
+                  className="min-h-[44px] px-3 py-1.5 flex items-center gap-1.5 text-xs text-slate-300 hover:text-white rounded-xl bg-surface-card border border-surface-border hover:bg-surface-raised transition-colors"
+                  title="Edit your badge and profile"
+                >
+                  <Pencil className="w-3.5 h-3.5 text-brand-400" />
+                  <span className="hidden sm:inline">Edit Profile</span>
+                </button>
+              )}
+
               {currentAttendee && (
                 <AvailabilityToggle
                   isAvailable={currentAttendee.is_available_to_chat}
@@ -459,6 +527,8 @@ export default function App() {
             <OnboardingWizard
               roomTitle={room.title}
               roomCategory={room.category}
+              initialProfile={currentAttendee}
+              onCancel={() => setView(currentAttendee ? 'room' : 'lobby')}
               onComplete={handleOnboardingComplete}
             />
           </div>
@@ -486,6 +556,7 @@ export default function App() {
                 currentAttendee={currentAttendee}
                 connections={connectionMap}
                 onSendWave={handleSendWave}
+                onEditProfile={() => setView('onboard')}
                 onRefresh={() => currentSlug && loadRoomData(currentSlug)}
                 isLoading={isLoading}
               />
@@ -516,7 +587,7 @@ export default function App() {
 
       {/* BOTTOM MOBILE NAVIGATION BAR (For active room attendees) */}
       {view === 'room' && room && currentAttendee && (
-        <nav className="fixed bottom-0 left-0 right-0 z-40 bg-surface-card/95 backdrop-blur-lg border-t border-surface-border px-3 py-2">
+        <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-surface-card/95 backdrop-blur-lg border-t border-surface-border px-3 py-2">
           <div className="max-w-md mx-auto grid grid-cols-4 gap-1">
             <button
               onClick={() => setActiveTab('directory')}

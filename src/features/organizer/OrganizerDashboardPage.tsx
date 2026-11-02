@@ -6,12 +6,13 @@ import { AvatarBadge } from '../../components/AvatarBadge';
 import { Badge } from '../../components/ui/badge';
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
+import { Modal } from '../../components/ui/modal';
 import { getRoleColor } from '../../lib/utils';
 import {
   Users,
   Download,
   Megaphone,
-  Sparkles,
+  Layers,
   Ban,
   ArrowLeft,
   Activity,
@@ -38,6 +39,7 @@ export const OrganizerDashboardPage: React.FC<OrganizerDashboardPageProps> = ({
   const [announcementMessage, setAnnouncementMessage] = useState('');
   const [isPosting, setIsPosting] = useState(false);
   const [postSuccess, setPostSuccess] = useState(false);
+  const [attendeeToBan, setAttendeeToBan] = useState<Attendee | null>(null);
 
   const announcementTemplates = [
     {
@@ -172,13 +174,13 @@ export const OrganizerDashboardPage: React.FC<OrganizerDashboardPageProps> = ({
 
         <div className="col-span-2 sm:col-span-1 p-4 bg-surface-card border border-surface-border rounded-2xl shadow-card">
           <div className="flex items-center gap-2 text-slate-400 text-xs font-medium">
-            <Sparkles className="w-4 h-4 text-purple-400" />
+            <Layers className="w-4 h-4 text-sky-400" />
             <span>Distinct Skills</span>
           </div>
-          <p className="text-2xl sm:text-3xl font-extrabold text-purple-400 mt-2">
+          <p className="text-2xl sm:text-3xl font-extrabold text-sky-400 mt-2">
             {analytics.topSkills.length}
           </p>
-          <span className="text-[10px] text-slate-400 font-mono mt-0.5 block">
+          <span className="text-xs text-slate-400 font-mono mt-0.5 block">
             Unique tech competencies
           </span>
         </div>
@@ -337,13 +339,14 @@ export const OrganizerDashboardPage: React.FC<OrganizerDashboardPageProps> = ({
                       </td>
                       <td className="py-3 px-3 text-right">
                         {attendee.is_banned ? (
-                          <span className="text-rose-400 font-semibold text-[10px] px-2 py-0.5 rounded bg-rose-500/10">
+                          <span className="text-rose-400 font-semibold text-xs px-2 py-0.5 rounded bg-rose-500/10">
                             Banned
                           </span>
                         ) : (
                           <button
-                            onClick={() => onBanAttendee(attendee.id)}
-                            className="min-h-[36px] px-2.5 py-1 text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 rounded-lg transition-colors inline-flex items-center gap-1 font-semibold"
+                            type="button"
+                            onClick={() => setAttendeeToBan(attendee)}
+                            className="min-h-[40px] px-3 py-1.5 text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 rounded-lg transition-colors inline-flex items-center gap-1.5 font-semibold text-xs"
                             title="Ban attendee from room"
                           >
                             <Ban className="w-3.5 h-3.5" />
@@ -359,6 +362,47 @@ export const OrganizerDashboardPage: React.FC<OrganizerDashboardPageProps> = ({
           </table>
         </div>
       </div>
+
+      {/* BAN CONFIRMATION MODAL */}
+      <Modal
+        isOpen={!!attendeeToBan}
+        onClose={() => setAttendeeToBan(null)}
+        title="Confirm Attendee Ban"
+        description="Expel attendee from room directory"
+      >
+        <div className="space-y-4 pt-2">
+          <div className="p-3 bg-rose-500/10 border border-rose-500/20 rounded-xl text-rose-300 text-xs leading-relaxed flex items-start gap-2.5">
+            <Ban className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
+            <span>
+              Are you sure you want to ban <strong>{attendeeToBan?.display_name}</strong>? They will immediately lose access to the networking hall, reciprocal waves, and live announcements.
+            </span>
+          </div>
+
+          <div className="flex items-center justify-end gap-3 pt-2">
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={() => setAttendeeToBan(null)}
+              className="min-h-[44px]"
+            >
+              Cancel
+            </Button>
+            <Button
+              type="button"
+              variant="danger"
+              onClick={async () => {
+                if (attendeeToBan) {
+                  await onBanAttendee(attendeeToBan.id);
+                  setAttendeeToBan(null);
+                }
+              }}
+              className="min-h-[44px] bg-rose-600 hover:bg-rose-700 text-white"
+            >
+              Confirm Ban
+            </Button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };
