@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { RoomAnalyticsSummary } from '../../types/models';
 import { getRoleColor } from '../../lib/utils';
 import { PieChart, BarChart2, Tag } from 'lucide-react';
@@ -10,42 +10,50 @@ export interface DemographicChartsProps {
 export const DemographicCharts: React.FC<DemographicChartsProps> = ({ analytics }) => {
   const { totalAttendees, roleBreakdown, intentBreakdown, topSkills } = analytics;
 
-  const roleEntries = Object.entries(roleBreakdown).sort((a, b) => b[1] - a[1]);
-  const intentEntries = Object.entries(intentBreakdown).sort((a, b) => b[1] - a[1]);
+  // Memoize entries to prevent expensive sorting on unrelated renders (Vercel rerender-memo rule)
+  const roleEntries = useMemo(() => {
+    return Object.entries(roleBreakdown).sort((a, b) => b[1] - a[1]);
+  }, [roleBreakdown]);
 
-  // Calculate SVG Donut Paths
-  let cumulativeAngle = 0;
-  const donutSlices = roleEntries.map(([role, count]) => {
-    const percentage = totalAttendees > 0 ? count / totalAttendees : 0;
-    const angle = percentage * 360;
-    const startAngle = cumulativeAngle;
-    cumulativeAngle += angle;
+  const intentEntries = useMemo(() => {
+    return Object.entries(intentBreakdown).sort((a, b) => b[1] - a[1]);
+  }, [intentBreakdown]);
 
-    // SVG arc calculation (radius: 70, strokeWidth: 26)
-    const r = 70;
-    const c = 100;
-    const startRad = (startAngle - 90) * (Math.PI / 180);
-    const endRad = (startAngle + angle - 90) * (Math.PI / 180);
+  // Calculate SVG Donut Paths with memoization
+  const donutSlices = useMemo(() => {
+    let cumulativeAngle = 0;
+    return roleEntries.map(([role, count]) => {
+      const percentage = totalAttendees > 0 ? count / totalAttendees : 0;
+      const angle = percentage * 360;
+      const startAngle = cumulativeAngle;
+      cumulativeAngle += angle;
 
-    const x1 = c + r * Math.cos(startRad);
-    const y1 = c + r * Math.sin(startRad);
-    const x2 = c + r * Math.cos(endRad);
-    const y2 = c + r * Math.sin(endRad);
-    const largeArc = angle > 180 ? 1 : 0;
+      // SVG arc calculation (radius: 70, strokeWidth: 26)
+      const r = 70;
+      const c = 100;
+      const startRad = (startAngle - 90) * (Math.PI / 180);
+      const endRad = (startAngle + angle - 90) * (Math.PI / 180);
 
-    const pathData =
-      angle >= 360
-        ? `M ${c - r} ${c} A ${r} ${r} 0 1 0 ${c + r} ${c} A ${r} ${r} 0 1 0 ${c - r} ${c}`
-        : `M ${x1} ${y1} A ${r} ${r} 0 ${largeArc} 1 ${x2} ${y2}`;
+      const x1 = c + r * Math.cos(startRad);
+      const y1 = c + r * Math.sin(startRad);
+      const x2 = c + r * Math.cos(endRad);
+      const y2 = c + r * Math.sin(endRad);
+      const largeArc = angle > 180 ? 1 : 0;
 
-    return {
-      role,
-      count,
-      percentage: Math.round(percentage * 100),
-      pathData,
-      color: getRoleColor(role),
-    };
-  });
+      const pathData =
+        angle >= 360
+          ? `M ${c - r} ${c} A ${r} ${r} 0 1 0 ${c + r} ${c} A ${r} ${r} 0 1 0 ${c - r} ${c}`
+          : `M ${x1} ${y1} A ${r} ${r} 0 ${largeArc} 1 ${x2} ${y2}`;
+
+      return {
+        role,
+        count,
+        percentage: Math.round(percentage * 100),
+        pathData,
+        color: getRoleColor(role),
+      };
+    });
+  }, [roleEntries, totalAttendees]);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

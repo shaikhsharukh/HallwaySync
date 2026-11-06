@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useDeferredValue } from 'react';
 import { Attendee, Room } from '../../types/models';
 import { ProfessionalRole } from '../../types/database';
 import { AttendeeCard } from './AttendeeCard';
@@ -27,27 +27,30 @@ export const DirectoryPage: React.FC<DirectoryPageProps> = ({
   isLoading,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const deferredSearchQuery = useDeferredValue(searchQuery);
   const [selectedRole, setSelectedRole] = useState<ProfessionalRole | null>(null);
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
   const [availableOnly, setAvailableOnly] = useState(false);
   const [selectedAttendee, setSelectedAttendee] = useState<Attendee | null>(null);
 
-  // Compute skill frequencies for the cloud
+  // Compute skill frequencies with single-pass iteration (Vercel js-combine-iterations rule)
   const skillCounts = useMemo(() => {
     const map = new Map<string, number>();
-    attendees.forEach((a) => {
-      a.skills.forEach((s) => {
+    for (const a of attendees) {
+      for (const s of a.skills) {
         map.set(s, (map.get(s) || 0) + 1);
-      });
+      }
+    }
+    const result: { tag: string; count: number }[] = [];
+    map.forEach((count, tag) => {
+      result.push({ tag, count });
     });
-    return Array.from(map.entries())
-      .map(([tag, count]) => ({ tag, count }))
-      .sort((a, b) => b.count - a.count);
+    return result.sort((a, b) => b.count - a.count);
   }, [attendees]);
 
-  // Fast client-side filtering (< 50ms)
+  // Fast client-side filtering (< 50ms) using deferred search query for responsive typing
   const filteredAttendees = useMemo(() => {
-    const q = searchQuery.toLowerCase().trim();
+    const q = deferredSearchQuery.toLowerCase().trim();
 
     return attendees.filter((a) => {
       if (availableOnly && !a.is_available_to_chat) return false;
@@ -63,7 +66,7 @@ export const DirectoryPage: React.FC<DirectoryPageProps> = ({
 
       return matchesName || matchesRole || matchesSkills || matchesHeadline || matchesZone;
     });
-  }, [attendees, searchQuery, selectedRole, selectedSkill, availableOnly]);
+  }, [attendees, deferredSearchQuery, selectedRole, selectedSkill, availableOnly]);
 
   return (
     <div className="space-y-4 max-w-4xl mx-auto p-4 sm:p-6 pb-24">
@@ -76,7 +79,7 @@ export const DirectoryPage: React.FC<DirectoryPageProps> = ({
         selectedSkill={selectedSkill}
         onSkillSelect={setSelectedSkill}
         availableOnly={availableOnly}
-        onAvailableToggle={() => setAvailableOnly(!availableOnly)}
+        onAvailableToggle={() => setAvailableOnly((prev) => !prev)}
         skillCounts={skillCounts}
       />
 

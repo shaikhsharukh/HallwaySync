@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo, lazy, Suspense } from 'react';
 import { useAuth } from './features/auth/useAuth';
 import { Room, Attendee, Announcement, ConnectionWithProfile } from './types/models';
 import { roomService } from './features/room/room-service';
@@ -7,22 +7,32 @@ import { connectionService } from './features/connections/connection-service';
 import { organizerService } from './features/organizer/organizer-service';
 import { useRoomPresence } from './features/room/useRoomPresence';
 
-// UI Components
+// Core UI Components (Direct load)
 import { CreateRoomPage } from './features/room/CreateRoomPage';
 import { RoomLobbyPage } from './features/room/RoomLobbyPage';
 import { OnboardingWizard } from './features/onboarding/OnboardingWizard';
 import { DirectoryPage } from './features/directory/DirectoryPage';
-import { MatchmakerPage } from './features/matching/MatchmakerPage';
 import { ConnectionsPage } from './features/connections/ConnectionsPage';
-import { OrganizerDashboardPage } from './features/organizer/OrganizerDashboardPage';
 import { AnnouncementBanner } from './features/organizer/AnnouncementBanner';
 import { AvailabilityToggle } from './features/directory/AvailabilityToggle';
 import { MyBadgeModal } from './features/connections/MyBadgeModal';
-import { QRBadgeScanner } from './features/connections/QRBadgeScanner';
 import { MutualMatchModal } from './features/connections/MutualMatchModal';
 import { Toast, ToastMessage } from './components/ui/toast';
 import { ThemeToggle } from './components/ThemeToggle';
 import { supabase, isSupabaseConfigured } from './lib/supabase';
+
+// Code-split heavy routes & camera scanner (Vercel bundle-dynamic-imports rule)
+const MatchmakerPage = lazy(() =>
+  import('./features/matching/MatchmakerPage').then((m) => ({ default: m.MatchmakerPage }))
+);
+const OrganizerDashboardPage = lazy(() =>
+  import('./features/organizer/OrganizerDashboardPage').then((m) => ({
+    default: m.OrganizerDashboardPage,
+  }))
+);
+const QRBadgeScanner = lazy(() =>
+  import('./features/connections/QRBadgeScanner').then((m) => ({ default: m.QRBadgeScanner }))
+);
 
 // Icons
 import {
@@ -151,33 +161,40 @@ export default function App() {
       }
       setRoom(targetRoom);
 
-      // Check / Ensure current user
-      const currentUser = await ensureAnonymousUser();
+      // Parallelize initial independent queries via Promise.all (Vercel async-parallel rule)
+      const [currentUser, latestAnn, loadedAttendees] = await Promise.all([
+        ensureAnonymousUser(),
+        organizerService.getLatestAnnouncement(targetRoom.id),
+        (async () => {
+          if (isSupabaseConfigured) {
+            const { data: attendeesData } = await supabase
+              .from('attendees')
+              .select('*')
+              .eq('room_id', targetRoom.id)
+              .eq('is_banned', false);
+            return (attendeesData as unknown as Attendee[]) || [];
+          }
+          const localAttendees: Attendee[] = JSON.parse(
+            localStorage.getItem('hackbuild_local_attendees') || '[]'
+          );
+          return localAttendees.filter((a) => a.room_id === targetRoom.id && !a.is_banned);
+        })(),
+      ]);
 
-      // Check latest announcement
-      const latestAnn = await organizerService.getLatestAnnouncement(targetRoom.id);
       setAnnouncement(latestAnn);
-
-      // Fetch attendees
-      let loadedAttendees: Attendee[] = [];
-      if (isSupabaseConfigured) {
-        const { data: attendeesData } = await supabase
-          .from('attendees')
-          .select('*')
-          .eq('room_id', targetRoom.id)
-          .eq('is_banned', false);
-        loadedAttendees = (attendeesData as unknown as Attendee[]) || [];
-      } else {
-        const localAttendees: Attendee[] = JSON.parse(
-          localStorage.getItem('hackbuild_local_attendees') || '[]'
-        );
-        loadedAttendees = localAttendees.filter((a) => a.room_id === targetRoom.id && !a.is_banned);
-      }
       setAttendees(loadedAttendees);
 
-      // Check if current user is onboarded
+      // Parallelize user onboarding check & connection fetch
       if (currentUser) {
-        const attendee = await onboardingService.getCurrentAttendee(targetRoom.id, currentUser.id);
+        const [attendee, myConns] = await Promise.all([
+          onboardingService.getCurrentAttendee(targetRoom.id, currentUser.id),
+          connectionService.getMyConnections(
+            targetRoom.id,
+            currentUser.id,
+            loadedAttendees
+          ),
+        ]);
+
         if (attendee) {
           setCurrentAttendee(attendee);
           setView((prev) => {
@@ -186,13 +203,6 @@ export default function App() {
             }
             return 'room';
           });
-
-          // Fetch connections with fresh attendee list
-          const myConns = await connectionService.getMyConnections(
-            targetRoom.id,
-            currentUser.id,
-            loadedAttendees
-          );
           setConnections(myConns);
         } else {
           setView((prev) => (prev === 'onboard' || prev === 'dashboard' ? prev : 'lobby'));
@@ -262,7 +272,7 @@ export default function App() {
   });
 
   // Connection status map for fast lookups
-  const connectionMap = React.useMemo(() => {
+  const connectionMap = useMemo(() => {
     const map: Record<string, 'pending' | 'connected' | 'none'> = {};
     for (const c of connections) {
       map[c.partner.id] = c.status === 'ignored' ? 'none' : c.status;
@@ -570,16 +580,18 @@ export default function App() {
         )}
 
         {view === 'dashboard' && room && (
-          <OrganizerDashboardPage
-            room={room}
-            attendees={attendees}
-            onBackToRoom={() => {
-              window.location.hash = `#room=${room.slug}`;
-              setView(currentAttendee ? 'room' : 'lobby');
-            }}
-            onPostAnnouncement={handlePostAnnouncement}
-            onBanAttendee={handleBanAttendee}
-          />
+          <Suspense fallback={<div className="min-h-[50vh] flex items-center justify-center"><div className="w-8 h-8 border-2 border-brand-500 border-t-transparent rounded-full animate-spin" /></div>}>
+            <OrganizerDashboardPage
+              room={room}
+              attendees={attendees}
+              onBackToRoom={() => {
+                window.location.hash = `#room=${room.slug}`;
+                setView(currentAttendee ? 'room' : 'lobby');
+              }}
+              onPostAnnouncement={handlePostAnnouncement}
+              onBanAttendee={handleBanAttendee}
+            />
+          </Suspense>
         )}
 
         {view === 'room' && room && currentAttendee && (
@@ -598,13 +610,15 @@ export default function App() {
             )}
 
             {activeTab === 'matches' && (
-              <MatchmakerPage
-                room={room}
-                currentAttendee={currentAttendee}
-                allAttendees={attendees}
-                connections={connectionMap}
-                onSendWave={handleSendWave}
-              />
+              <Suspense fallback={<div className="min-h-[50vh] flex items-center justify-center"><div className="w-8 h-8 border-2 border-brand-500 border-t-transparent rounded-full animate-spin" /></div>}>
+                <MatchmakerPage
+                  room={room}
+                  currentAttendee={currentAttendee}
+                  allAttendees={attendees}
+                  connections={connectionMap}
+                  onSendWave={handleSendWave}
+                />
+              </Suspense>
             )}
 
             {activeTab === 'connections' && (
@@ -684,12 +698,16 @@ export default function App() {
             roomId={room.id}
           />
 
-          <QRBadgeScanner
-            isOpen={isScannerOpen}
-            onClose={() => setIsScannerOpen(false)}
-            roomId={room.id}
-            onScanSuccess={handleBadgeScanSuccess}
-          />
+          {isScannerOpen && (
+            <Suspense fallback={null}>
+              <QRBadgeScanner
+                isOpen={isScannerOpen}
+                onClose={() => setIsScannerOpen(false)}
+                roomId={room.id}
+                onScanSuccess={handleBadgeScanSuccess}
+              />
+            </Suspense>
+          )}
 
           <MutualMatchModal
             isOpen={Boolean(mutualPartner)}

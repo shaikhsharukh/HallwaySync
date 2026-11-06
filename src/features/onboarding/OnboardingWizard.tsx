@@ -49,6 +49,9 @@ const INTENTS = [
   'Looking for Mentor / Advice',
 ];
 
+const DEFAULT_INITIAL_SKILLS = ['TypeScript', 'React'];
+const DEFAULT_INITIAL_INTENT = ['Looking for Team'];
+
 export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({
   roomTitle,
   roomCategory,
@@ -64,9 +67,9 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({
   const [displayName, setDisplayName] = useState(initialProfile?.display_name || '');
   const [role, setRole] = useState<ProfessionalRole>(initialProfile?.role || 'Fullstack');
   const [headline, setHeadline] = useState(initialProfile?.headline || '');
-  const [skills, setSkills] = useState<string[]>(initialProfile?.skills || ['TypeScript', 'React']);
+  const [skills, setSkills] = useState<string[]>(initialProfile?.skills || DEFAULT_INITIAL_SKILLS);
   const [customSkill, setCustomSkill] = useState('');
-  const [intent, setIntent] = useState<string[]>(initialProfile?.intent || ['Looking for Team']);
+  const [intent, setIntent] = useState<string[]>(initialProfile?.intent || DEFAULT_INITIAL_INTENT);
   const [contactHandle, setContactHandle] = useState(initialProfile?.contact_handle || '');
   const [avatarGithub, setAvatarGithub] = useState(initialProfile?.avatar_github || '');
 
