@@ -16,11 +16,11 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       primary:
         'bg-brand-500 text-slate-950 font-semibold hover:bg-brand-400 active:bg-brand-600 shadow-emerald',
       secondary:
-        'bg-surface-raised text-slate-100 hover:bg-surface-hover active:bg-surface-border border border-surface-border',
+        'bg-surface-raised text-slate-900 dark:text-slate-100 hover:bg-surface-hover active:bg-surface-border border border-surface-border',
       outline:
-        'border border-surface-border bg-transparent text-slate-200 hover:border-slate-500 hover:text-white',
+        'border border-surface-border bg-transparent text-slate-700 dark:text-slate-200 hover:border-slate-400 dark:hover:border-slate-500 hover:text-slate-950 dark:hover:text-white',
       ghost:
-        'bg-transparent text-slate-300 hover:bg-surface-raised hover:text-white',
+        'bg-transparent text-slate-700 dark:text-slate-300 hover:bg-surface-raised hover:text-slate-950 dark:hover:text-white',
       danger:
         'bg-rose-600 text-white hover:bg-rose-500 active:bg-rose-700',
     };

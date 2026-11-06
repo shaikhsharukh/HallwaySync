@@ -21,6 +21,7 @@ import { MyBadgeModal } from './features/connections/MyBadgeModal';
 import { QRBadgeScanner } from './features/connections/QRBadgeScanner';
 import { MutualMatchModal } from './features/connections/MutualMatchModal';
 import { Toast, ToastMessage } from './components/ui/toast';
+import { ThemeToggle } from './components/ThemeToggle';
 import { supabase, isSupabaseConfigured } from './lib/supabase';
 
 // Icons
@@ -358,7 +359,7 @@ export default function App() {
   const isCreator = room ? roomService.isRoomCreator(room.slug) : false;
 
   return (
-    <div className="min-h-screen bg-surface-base text-slate-100 flex flex-col font-sans selection:bg-brand-500 selection:text-slate-950">
+    <div className="min-h-screen bg-surface-base text-slate-900 dark:text-slate-100 flex flex-col font-sans selection:bg-brand-500 selection:text-slate-950">
       {/* Real-Time Pinned Announcement Banner */}
       <AnnouncementBanner announcement={announcement} />
 
@@ -373,14 +374,14 @@ export default function App() {
             }}
             className="flex items-center gap-2.5 cursor-pointer select-none"
           >
-            <div className="w-8 h-8 rounded-xl bg-brand-500/20 text-brand-400 flex items-center justify-center font-bold text-sm border border-brand-500/30">
+            <div className="w-8 h-8 rounded-xl bg-brand-500/20 text-brand-600 dark:text-brand-400 flex items-center justify-center font-bold text-sm border border-brand-500/30">
               ⚡
             </div>
             <div>
-              <h1 className="text-sm font-bold tracking-tight text-slate-100 leading-none">
+              <h1 className="text-sm font-bold tracking-tight text-slate-900 dark:text-slate-100 leading-none">
                 HallwaySync
               </h1>
-              <span className="text-xs text-slate-400 font-mono">
+              <span className="text-xs text-slate-500 dark:text-slate-400 font-mono">
                 Event Networking
               </span>
             </div>
@@ -394,8 +395,8 @@ export default function App() {
                 onClick={() => setActiveTab('directory')}
                 className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-colors ${
                   activeTab === 'directory'
-                    ? 'text-brand-400 bg-brand-500/10'
-                    : 'text-slate-400 hover:text-slate-200'
+                    ? 'text-brand-600 dark:text-brand-400 bg-brand-500/10'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
                 }`}
               >
                 <Users className="w-4 h-4" />
@@ -406,8 +407,8 @@ export default function App() {
                 onClick={() => setActiveTab('matches')}
                 className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-colors ${
                   activeTab === 'matches'
-                    ? 'text-brand-400 bg-brand-500/10'
-                    : 'text-slate-400 hover:text-slate-200'
+                    ? 'text-brand-600 dark:text-brand-400 bg-brand-500/10'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
                 }`}
               >
                 <Sparkles className="w-4 h-4" />
@@ -418,8 +419,8 @@ export default function App() {
                 onClick={() => setActiveTab('connections')}
                 className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-colors ${
                   activeTab === 'connections'
-                    ? 'text-brand-400 bg-brand-500/10'
-                    : 'text-slate-400 hover:text-slate-200'
+                    ? 'text-brand-600 dark:text-brand-400 bg-brand-500/10'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
                 }`}
               >
                 <Link2 className="w-4 h-4" />
@@ -428,7 +429,7 @@ export default function App() {
               <button
                 type="button"
                 onClick={() => setIsBadgeModalOpen(true)}
-                className="px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 text-slate-400 hover:text-slate-200 transition-colors"
+                className="px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-colors"
               >
                 <QrCode className="w-4 h-4" />
                 <span>My Badge</span>
@@ -436,48 +437,53 @@ export default function App() {
             </nav>
           )}
 
-          {room && view === 'room' && (
-            <div className="flex items-center gap-2">
-              {currentAttendee && (
-                <button
-                  type="button"
-                  onClick={() => setView('onboard')}
-                  className="min-h-[44px] px-3 py-1.5 flex items-center gap-1.5 text-xs text-slate-300 hover:text-white rounded-xl bg-surface-card border border-surface-border hover:bg-surface-raised transition-colors"
-                  title="Edit your badge and profile"
-                >
-                  <Pencil className="w-3.5 h-3.5 text-brand-400" />
-                  <span className="hidden sm:inline">Edit Profile</span>
-                </button>
-              )}
+          {/* ACTION CLUSTER (Includes ThemeToggle on all views) */}
+          <div className="flex items-center gap-2">
+            {room && view === 'room' && (
+              <>
+                {currentAttendee && (
+                  <button
+                    type="button"
+                    onClick={() => setView('onboard')}
+                    className="min-h-[44px] px-3 py-1.5 flex items-center gap-1.5 text-xs text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white rounded-xl bg-surface-card border border-surface-border hover:bg-surface-raised transition-colors"
+                    title="Edit your badge and profile"
+                  >
+                    <Pencil className="w-3.5 h-3.5 text-brand-500 dark:text-brand-400" />
+                    <span className="hidden sm:inline">Edit Profile</span>
+                  </button>
+                )}
 
-              {currentAttendee && (
-                <AvailabilityToggle
-                  isAvailable={currentAttendee.is_available_to_chat}
-                  currentZone={currentAttendee.current_zone}
-                  onUpdate={handleUpdateAvailability}
-                />
-              )}
+                {currentAttendee && (
+                  <AvailabilityToggle
+                    isAvailable={currentAttendee.is_available_to_chat}
+                    currentZone={currentAttendee.current_zone}
+                    onUpdate={handleUpdateAvailability}
+                  />
+                )}
 
-              {/* Online Indicator */}
-              <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-card border border-surface-border text-xs text-slate-300">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span>{onlineCount || attendees.length} in hall</span>
-              </div>
+                {/* Online Indicator */}
+                <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-card border border-surface-border text-xs text-slate-700 dark:text-slate-300">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span>{onlineCount || attendees.length} in hall</span>
+                </div>
 
-              {isCreator && (
-                <button
-                  onClick={() => {
-                    window.location.hash = `#dashboard=${room.slug}`;
-                    setView('dashboard');
-                  }}
-                  className="min-h-[44px] min-w-[44px] flex items-center justify-center text-slate-400 hover:text-white rounded-xl bg-surface-card border border-surface-border"
-                  title="Organizer Dashboard"
-                >
-                  <LayoutDashboard className="w-4 h-4 text-brand-400" />
-                </button>
-              )}
-            </div>
-          )}
+                {isCreator && (
+                  <button
+                    onClick={() => {
+                      window.location.hash = `#dashboard=${room.slug}`;
+                      setView('dashboard');
+                    }}
+                    className="min-h-[44px] min-w-[44px] flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white rounded-xl bg-surface-card border border-surface-border"
+                    title="Organizer Dashboard"
+                  >
+                    <LayoutDashboard className="w-4 h-4 text-brand-500 dark:text-brand-400" />
+                  </button>
+                )}
+              </>
+            )}
+
+            <ThemeToggle />
+          </div>
         </div>
       </header>
 
@@ -495,7 +501,7 @@ export default function App() {
         {isLoading && !room && (
           <div className="min-h-[60vh] flex flex-col items-center justify-center gap-3">
             <div className="w-8 h-8 border-2 border-brand-500 border-t-transparent rounded-full animate-spin" />
-            <p className="text-xs text-slate-400 font-mono">Loading event room...</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400 font-mono">Loading event room...</p>
           </div>
         )}
 
@@ -593,8 +599,8 @@ export default function App() {
               onClick={() => setActiveTab('directory')}
               className={`min-h-[44px] flex flex-col items-center justify-center gap-1 rounded-xl text-xs font-semibold transition-colors select-none ${
                 activeTab === 'directory'
-                  ? 'text-brand-400 bg-brand-500/10'
-                  : 'text-slate-400 hover:text-slate-200'
+                  ? 'text-brand-600 dark:text-brand-400 bg-brand-500/10'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
               }`}
             >
               <Users className="w-5 h-5" />
@@ -605,8 +611,8 @@ export default function App() {
               onClick={() => setActiveTab('matches')}
               className={`min-h-[44px] flex flex-col items-center justify-center gap-1 rounded-xl text-xs font-semibold transition-colors select-none ${
                 activeTab === 'matches'
-                  ? 'text-brand-400 bg-brand-500/10'
-                  : 'text-slate-400 hover:text-slate-200'
+                  ? 'text-brand-600 dark:text-brand-400 bg-brand-500/10'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
               }`}
             >
               <Sparkles className="w-5 h-5" />
@@ -617,8 +623,8 @@ export default function App() {
               onClick={() => setActiveTab('connections')}
               className={`min-h-[44px] flex flex-col items-center justify-center gap-1 rounded-xl text-xs font-semibold transition-colors select-none relative ${
                 activeTab === 'connections'
-                  ? 'text-brand-400 bg-brand-500/10'
-                  : 'text-slate-400 hover:text-slate-200'
+                  ? 'text-brand-600 dark:text-brand-400 bg-brand-500/10'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
               }`}
             >
               <Link2 className="w-5 h-5" />
@@ -630,9 +636,9 @@ export default function App() {
 
             <button
               onClick={() => setIsBadgeModalOpen(true)}
-              className="min-h-[44px] flex flex-col items-center justify-center gap-1 rounded-xl text-xs font-semibold text-slate-400 hover:text-slate-200 transition-colors select-none"
+              className="min-h-[44px] flex flex-col items-center justify-center gap-1 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-colors select-none"
             >
-              <QrCode className="w-5 h-5 text-brand-400" />
+              <QrCode className="w-5 h-5 text-brand-500 dark:text-brand-400" />
               <span>My Badge</span>
             </button>
           </div>

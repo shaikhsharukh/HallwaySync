@@ -32,8 +32,8 @@ export const Tabs: React.FC<TabsProps> = ({ tabs, activeTab, onChange, className
             className={cn(
               'min-h-[44px] flex-1 min-w-[90px] flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all select-none',
               isActive
-                ? 'bg-surface-raised text-brand-400 font-semibold shadow-sm border border-surface-border'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-surface-card'
+                ? 'bg-surface-raised text-brand-600 dark:text-brand-400 font-semibold shadow-sm border border-surface-border'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-surface-card'
             )}
           >
             {tab.icon}
@@ -43,8 +43,8 @@ export const Tabs: React.FC<TabsProps> = ({ tabs, activeTab, onChange, className
                 className={cn(
                   'px-1.5 py-0.5 rounded-full text-[10px] font-bold',
                   isActive
-                    ? 'bg-brand-500/20 text-brand-300'
-                    : 'bg-surface-border text-slate-400'
+                    ? 'bg-brand-500/20 text-brand-700 dark:text-brand-300'
+                    : 'bg-surface-border text-slate-600 dark:text-slate-400'
                 )}
               >
                 {tab.count}

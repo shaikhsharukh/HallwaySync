@@ -18,11 +18,11 @@ export const Badge: React.FC<BadgeProps> = ({
     'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium select-none transition-colors';
 
   const variants = {
-    default: 'bg-surface-raised text-slate-300 border border-surface-border',
-    brand: 'bg-brand-500/10 text-brand-400 border border-brand-500/20',
-    outline: 'border border-surface-border text-slate-400 bg-transparent',
+    default: 'bg-surface-raised text-slate-700 dark:text-slate-300 border border-surface-border',
+    brand: 'bg-brand-500/10 text-brand-600 dark:text-brand-400 border border-brand-500/20',
+    outline: 'border border-surface-border text-slate-600 dark:text-slate-400 bg-transparent',
     role: 'border font-medium',
-    availability: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30',
+    availability: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30',
   };
 
   const customStyle = color

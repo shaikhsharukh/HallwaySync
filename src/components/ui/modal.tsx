@@ -101,19 +101,19 @@ export const Modal: React.FC<ModalProps> = ({
       <div
         ref={modalRef}
         className={cn(
-          'relative w-full max-w-lg bg-surface-card border border-surface-border rounded-t-3xl sm:rounded-3xl p-6 shadow-modal z-10 max-h-[90vh] overflow-y-auto',
+          'relative w-full max-w-lg bg-surface-card border border-surface-border text-slate-900 dark:text-slate-100 rounded-t-3xl sm:rounded-3xl p-6 shadow-modal z-10 max-h-[90vh] overflow-y-auto',
           className
         )}
       >
         <div className="flex items-start justify-between mb-4">
           <div>
             {title && (
-              <h2 id="modal-dialog-title" className="text-lg font-semibold text-slate-100">
+              <h2 id="modal-dialog-title" className="text-lg font-semibold text-slate-900 dark:text-slate-100">
                 {title}
               </h2>
             )}
             {description && (
-              <p id="modal-dialog-desc" className="text-xs text-slate-400 mt-0.5">
+              <p id="modal-dialog-desc" className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                 {description}
               </p>
             )}
@@ -121,7 +121,7 @@ export const Modal: React.FC<ModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="min-h-[44px] min-w-[44px] flex items-center justify-center -mr-2 -mt-2 text-slate-400 hover:text-white rounded-full hover:bg-surface-raised transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500/50"
+            className="min-h-[44px] min-w-[44px] flex items-center justify-center -mr-2 -mt-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white rounded-full hover:bg-surface-raised transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500/50"
             aria-label="Close dialog"
           >
             <X className="w-5 h-5" />
