@@ -402,6 +402,29 @@ describe('User Story 2 Component & Integration Tests: Directory & Discovery', ()
       expect(siteLink).toHaveAttribute('href', 'https://jordanlee.design');
     });
 
+    it('renders Edit My Badge & Profile button and triggers onEditProfile when isSelf is true', () => {
+      const onEditProfileMock = vi.fn();
+      const onCloseMock = vi.fn();
+
+      render(
+        <AttendeeDetailModal
+          attendee={mockAttendees[0]}
+          isOpen={true}
+          onClose={onCloseMock}
+          isSelf={true}
+          connectionStatus="none"
+          onEditProfile={onEditProfileMock}
+        />
+      );
+
+      const editButton = screen.getByRole('button', { name: /edit my badge & profile/i });
+      expect(editButton).toBeInTheDocument();
+
+      fireEvent.click(editButton);
+      expect(onCloseMock).toHaveBeenCalledTimes(1);
+      expect(onEditProfileMock).toHaveBeenCalledTimes(1);
+    });
+
     it('triggers onSendWave when clicking Wave on AttendeeCard without opening modal', async () => {
       render(
         <DirectoryPage

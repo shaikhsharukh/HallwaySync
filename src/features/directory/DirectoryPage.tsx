@@ -146,6 +146,7 @@ export const DirectoryPage: React.FC<DirectoryPageProps> = ({
             onSendWave(selectedAttendee.id);
           }
         }}
+        onEditProfile={onEditProfile}
       />
     </div>
   );

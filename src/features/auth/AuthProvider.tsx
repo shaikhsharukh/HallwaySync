@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState, useCallback, useMemo } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase, isSupabaseConfigured } from '../../lib/supabase';
 
@@ -61,13 +61,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
   }, []);
 
-  const ensureAnonymousUser = async (): Promise<User | null> => {
+  const ensureAnonymousUser = useCallback(async (): Promise<User | null> => {
     if (isSupabaseConfigured) {
       try {
         const { data: { session } } = await supabase.auth.getSession();
         if (session?.user) {
-          setUser(session.user);
-          setSession(session);
+          setUser((prev) => (prev?.id === session.user.id ? prev : session.user));
+          setSession((prev) => (prev?.access_token === session.access_token ? prev : session));
           return session.user;
         }
 
@@ -82,8 +82,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
     }
 
-    if (user) return user;
-
     let mockId = localStorage.getItem(MOCK_USER_KEY);
     if (!mockId) {
       mockId = crypto.randomUUID ? crypto.randomUUID() : `mock-${Date.now()}`;
@@ -97,11 +95,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       created_at: new Date().toISOString(),
       is_anonymous: true,
     } as User;
-    setUser(mockUser);
+    setUser((prev) => (prev?.id === mockId ? prev : mockUser));
     return mockUser;
-  };
+  }, []);
 
-  const signOut = async () => {
+  const signOut = useCallback(async () => {
     if (isSupabaseConfigured) {
       await supabase.auth.signOut();
     } else {
@@ -109,19 +107,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
     setUser(null);
     setSession(null);
-  };
+  }, []);
+
+  const contextValue = useMemo(
+    () => ({
+      user,
+      session,
+      isLoading,
+      isAnonymous: user?.is_anonymous ?? true,
+      ensureAnonymousUser,
+      signOut,
+    }),
+    [user, session, isLoading, ensureAnonymousUser, signOut]
+  );
 
   return (
-    <AuthContext.Provider
-      value={{
-        user,
-        session,
-        isLoading,
-        isAnonymous: user?.is_anonymous ?? true,
-        ensureAnonymousUser,
-        signOut,
-      }}
-    >
+    <AuthContext.Provider value={contextValue}>
       {children}
     </AuthContext.Provider>
   );

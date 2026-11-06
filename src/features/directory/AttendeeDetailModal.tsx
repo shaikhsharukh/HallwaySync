@@ -14,6 +14,7 @@ import {
   Linkedin,
   Mail,
   ShieldCheck,
+  Pencil,
 } from 'lucide-react';
 
 export interface AttendeeDetailModalProps {
@@ -23,6 +24,7 @@ export interface AttendeeDetailModalProps {
   isSelf: boolean;
   connectionStatus?: 'pending' | 'connected' | 'none';
   onWaveClick?: () => void;
+  onEditProfile?: () => void;
 }
 
 export const AttendeeDetailModal: React.FC<AttendeeDetailModalProps> = ({
@@ -32,6 +34,7 @@ export const AttendeeDetailModal: React.FC<AttendeeDetailModalProps> = ({
   isSelf,
   connectionStatus = 'none',
   onWaveClick,
+  onEditProfile,
 }) => {
   if (!attendee) return null;
 
@@ -225,9 +228,25 @@ export const AttendeeDetailModal: React.FC<AttendeeDetailModalProps> = ({
           {isConnected ? (
             <div className="pt-1">{renderContactButton()}</div>
           ) : isSelf ? (
-            <p className="text-xs text-slate-500 dark:text-slate-400">
-              Your contact info is: <span className="text-brand-700 dark:text-brand-300 font-mono">{attendee.contact_handle || 'Not set'}</span>
-            </p>
+            <div className="space-y-3 pt-1">
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                Your contact info is: <span className="text-brand-700 dark:text-brand-300 font-mono">{attendee.contact_handle || 'Not set'}</span>
+              </p>
+              {onEditProfile && (
+                <Button
+                  type="button"
+                  variant="secondary"
+                  onClick={() => {
+                    onClose();
+                    onEditProfile();
+                  }}
+                  className="w-full min-h-[44px] text-xs font-semibold flex items-center justify-center gap-1.5"
+                >
+                  <Pencil className="w-3.5 h-3.5 text-brand-400" />
+                  <span>Edit My Badge & Profile</span>
+                </Button>
+              )}
+            </div>
           ) : (
             <div className="space-y-2 pt-1">
               <p className="text-xs text-slate-400">

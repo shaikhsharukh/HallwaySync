@@ -180,7 +180,12 @@ export default function App() {
         const attendee = await onboardingService.getCurrentAttendee(targetRoom.id, currentUser.id);
         if (attendee) {
           setCurrentAttendee(attendee);
-          setView((prev) => (prev === 'dashboard' ? 'dashboard' : 'room'));
+          setView((prev) => {
+            if (prev === 'dashboard' || prev === 'onboard') {
+              return prev;
+            }
+            return 'room';
+          });
 
           // Fetch connections with fresh attendee list
           const myConns = await connectionService.getMyConnections(

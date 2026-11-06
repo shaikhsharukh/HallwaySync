@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
 import { ProfessionalRole } from '../../types/database';
@@ -69,6 +69,19 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({
   const [intent, setIntent] = useState<string[]>(initialProfile?.intent || ['Looking for Team']);
   const [contactHandle, setContactHandle] = useState(initialProfile?.contact_handle || '');
   const [avatarGithub, setAvatarGithub] = useState(initialProfile?.avatar_github || '');
+
+  // Keep form state synchronized when initialProfile changes
+  useEffect(() => {
+    if (initialProfile) {
+      setDisplayName(initialProfile.display_name || '');
+      setRole(initialProfile.role || 'Fullstack');
+      setHeadline(initialProfile.headline || '');
+      setSkills(initialProfile.skills?.length ? initialProfile.skills : ['TypeScript', 'React']);
+      setIntent(initialProfile.intent?.length ? initialProfile.intent : ['Looking for Team']);
+      setContactHandle(initialProfile.contact_handle || '');
+      setAvatarGithub(initialProfile.avatar_github || '');
+    }
+  }, [initialProfile]);
 
   // Validation
   const [error, setError] = useState<string | null>(null);
