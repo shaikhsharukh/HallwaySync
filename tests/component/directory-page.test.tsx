@@ -869,6 +869,105 @@ describe('User Story 2 Component & Integration Tests: Directory & Discovery', ()
       ) as HTMLInputElement;
       expect(zoneInput.value).toBe('Stage A');
     });
+
+    it('allows turning off availability directly from inside the zone modal when already available', async () => {
+      const onUpdateMock = vi.fn().mockResolvedValue(undefined);
+      render(
+        <AvailabilityToggle
+          isAvailable={true}
+          currentZone="Coffee Area"
+          onUpdate={onUpdateMock}
+        />
+      );
+
+      // Open modal via zone badge
+      fireEvent.click(screen.getByRole('button', { name: /coffee area/i }));
+
+      // Find the turn off button inside the modal
+      const turnOffBtn = screen.getByRole('button', {
+        name: /turn off available status/i,
+      });
+      expect(turnOffBtn).toBeInTheDocument();
+
+      fireEvent.click(turnOffBtn);
+
+      await waitFor(() => {
+        expect(onUpdateMock).toHaveBeenCalledWith(false, null);
+      });
+    });
+
+    it('portals modal to document.body escaping parent stacking contexts', () => {
+      const onUpdateMock = vi.fn().mockResolvedValue(undefined);
+      const { container } = render(
+        <div id="sticky-header-container" style={{ position: 'sticky', zIndex: 30 }}>
+          <AvailabilityToggle
+            isAvailable={false}
+            currentZone={null}
+            onUpdate={onUpdateMock}
+          />
+        </div>
+      );
+
+      // Modal is not open yet
+      expect(document.body.querySelector('[role="dialog"]')).not.toBeInTheDocument();
+
+      // Click to open modal
+      fireEvent.click(screen.getByRole('button', { name: /set available/i }));
+
+      // Modal dialog must be mounted directly under document.body via portal, not trapped inside sticky-header-container
+      const dialog = document.body.querySelector('[role="dialog"]');
+      expect(dialog).toBeInTheDocument();
+      expect(container.querySelector('[role="dialog"]')).not.toBeInTheDocument();
+    });
+
+    it('focuses the zone input element rather than the modal close button on open', async () => {
+      const onUpdateMock = vi.fn().mockResolvedValue(undefined);
+      render(
+        <AvailabilityToggle
+          isAvailable={false}
+          currentZone={null}
+          onUpdate={onUpdateMock}
+        />
+      );
+
+      fireEvent.click(screen.getByRole('button', { name: /set available/i }));
+
+      const zoneInput = screen.getByPlaceholderText(/e\.g\. table 14 or coffee lounge/i);
+      const closeBtn = screen.getByRole('button', { name: /close dialog/i });
+
+      // After focus timeout runs, activeElement must NOT be the close button
+      await waitFor(() => {
+        expect(document.activeElement).not.toBe(closeBtn);
+        expect(document.activeElement).toBe(zoneInput);
+      });
+    });
+
+    it('synchronizes internal zone state when currentZone prop updates dynamically', () => {
+      const onUpdateMock = vi.fn().mockResolvedValue(undefined);
+      const { rerender } = render(
+        <AvailabilityToggle
+          isAvailable={true}
+          currentZone="Zone 1"
+          onUpdate={onUpdateMock}
+        />
+      );
+
+      // Dynamically update prop
+      rerender(
+        <AvailabilityToggle
+          isAvailable={true}
+          currentZone="Zone 2 - Hackathon"
+          onUpdate={onUpdateMock}
+        />
+      );
+
+      fireEvent.click(screen.getByRole('button', { name: /zone 2 - hackathon/i }));
+
+      const zoneInput = screen.getByPlaceholderText(
+        /e\.g\. table 14 or coffee lounge/i
+      ) as HTMLInputElement;
+      expect(zoneInput.value).toBe('Zone 2 - Hackathon');
+    });
   });
 
   // =========================================================================

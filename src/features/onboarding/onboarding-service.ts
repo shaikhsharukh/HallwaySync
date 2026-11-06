@@ -128,6 +128,18 @@ export const onboardingService = {
           }
         }
       }
+
+      // Also update local fallback attendees store if populated
+      const existing: Attendee[] = JSON.parse(
+        localStorage.getItem(LOCAL_ATTENDEES_KEY) || '[]'
+      );
+      const index = existing.findIndex((a) => a.id === attendeeId);
+      if (index >= 0) {
+        existing[index].is_available_to_chat = isAvailable;
+        existing[index].available_until = availableUntil;
+        existing[index].current_zone = zone ?? null;
+        localStorage.setItem(LOCAL_ATTENDEES_KEY, JSON.stringify(existing));
+      }
     } catch {
       // Ignore cache storage errors
     }
@@ -146,17 +158,6 @@ export const onboardingService = {
         console.error('Failed to update availability in Supabase:', error);
       }
       return;
-    }
-
-    const existing: Attendee[] = JSON.parse(
-      localStorage.getItem(LOCAL_ATTENDEES_KEY) || '[]'
-    );
-    const index = existing.findIndex((a) => a.id === attendeeId);
-    if (index >= 0) {
-      existing[index].is_available_to_chat = isAvailable;
-      existing[index].available_until = availableUntil;
-      existing[index].current_zone = zone ?? null;
-      localStorage.setItem(LOCAL_ATTENDEES_KEY, JSON.stringify(existing));
     }
   },
 };
