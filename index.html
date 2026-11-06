@@ -174,17 +174,26 @@
       ::-webkit-scrollbar-thumb:hover {
         background: #363f52;
       }
+      :root {
+        --bg-surface: #f5f5f7;
+        --text-surface: #0f172a;
+      }
+      .dark {
+        --bg-surface: #0c0e12;
+        --text-surface: #f1f5f9;
+      }
       body {
         margin: 0;
-        background-color: #0c0e12;
-        color: #f1f5f9;
+        background-color: var(--bg-surface);
+        color: var(--text-surface);
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         overflow-x: hidden;
       }
     </style>
   </head>
-  <body class="bg-surface-base text-slate-100 min-h-screen">
-    <div id="root">
+  <body class="bg-surface-base text-slate-900 dark:text-slate-100 min-h-screen">
+    <div id="root"></div>
+    <noscript>
       <!-- Pre-rendered Semantic Content for Search Engine Crawlers & Non-JS Clients -->
       <header style="padding: 1.5rem; border-bottom: 1px solid #1f2937; max-width: 64rem; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
         <div style="display: flex; align-items: center; gap: 0.75rem;">
@@ -236,7 +245,7 @@
           </div>
         </section>
       </main>
-    </div>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

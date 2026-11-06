@@ -34,12 +34,36 @@ import {
   Pencil,
 } from 'lucide-react';
 
+function getInitialNavigationState(): {
+  view: 'create' | 'lobby' | 'onboard' | 'room' | 'dashboard';
+  slug: string | null;
+} {
+  if (typeof window === 'undefined') {
+    return { view: 'create', slug: null };
+  }
+  try {
+    const hash = window.location.hash.replace('#', '');
+    const params = new URLSearchParams(hash);
+    const dashboardParam = params.get('dashboard');
+    const roomParam = params.get('room');
+
+    if (dashboardParam) {
+      return { view: 'dashboard', slug: dashboardParam };
+    }
+    if (roomParam) {
+      return { view: 'lobby', slug: roomParam };
+    }
+  } catch (_) {}
+  return { view: 'create', slug: null };
+}
+
 export default function App() {
   const { ensureAnonymousUser } = useAuth();
 
-  // Navigation State
-  const [currentSlug, setCurrentSlug] = useState<string | null>(null);
-  const [view, setView] = useState<'create' | 'lobby' | 'onboard' | 'room' | 'dashboard'>('create');
+  // Navigation State initialized synchronously from URL hash
+  const [initialNav] = useState(getInitialNavigationState);
+  const [currentSlug, setCurrentSlug] = useState<string | null>(initialNav.slug);
+  const [view, setView] = useState<'create' | 'lobby' | 'onboard' | 'room' | 'dashboard'>(initialNav.view);
   const [activeTab, setActiveTab] = useState<'directory' | 'matches' | 'connections'>('directory');
 
   // Room & Attendee State
@@ -56,7 +80,7 @@ export default function App() {
   const [mutualPartner, setMutualPartner] = useState<Attendee | null>(null);
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
 
-  // Parse URL hash on mount
+  // Parse URL hash on hash changes
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#', '');
@@ -71,13 +95,13 @@ export default function App() {
         setCurrentSlug(roomParam);
         setView((prev) => (prev === 'create' ? 'lobby' : prev));
       } else {
+        setCurrentSlug(null);
         setView('create');
         setRoom(null);
         setCurrentAttendee(null);
       }
     };
 
-    handleHashChange();
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
