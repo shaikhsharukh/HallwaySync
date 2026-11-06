@@ -114,8 +114,26 @@ export const onboardingService = {
       ? new Date(Date.now() + 60 * 60 * 1000).toISOString() // 60 mins
       : null;
 
+    // Update session caches in localStorage so room refreshes preserve updated availability
+    try {
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith('attendee_')) {
+          const item = JSON.parse(localStorage.getItem(key) || '{}');
+          if (item.id === attendeeId) {
+            item.is_available_to_chat = isAvailable;
+            item.available_until = availableUntil;
+            item.current_zone = zone ?? null;
+            localStorage.setItem(key, JSON.stringify(item));
+          }
+        }
+      }
+    } catch {
+      // Ignore cache storage errors
+    }
+
     if (isSupabaseConfigured) {
-      await (supabase.from('attendees') as any)
+      const { error } = await (supabase.from('attendees') as any)
         .update({
           is_available_to_chat: isAvailable,
           available_until: availableUntil,
@@ -123,6 +141,10 @@ export const onboardingService = {
           updated_at: new Date().toISOString(),
         })
         .eq('id', attendeeId);
+
+      if (error) {
+        console.error('Failed to update availability in Supabase:', error);
+      }
       return;
     }
 

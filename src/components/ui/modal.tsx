@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
@@ -9,6 +10,7 @@ export interface ModalProps {
   description?: string;
   children: React.ReactNode;
   className?: string;
+  usePortal?: boolean;
 }
 
 export const Modal: React.FC<ModalProps> = ({
@@ -18,6 +20,7 @@ export const Modal: React.FC<ModalProps> = ({
   description,
   children,
   className,
+  usePortal = false,
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const previouslyFocusedRef = useRef<HTMLElement | null>(null);
@@ -62,9 +65,23 @@ export const Modal: React.FC<ModalProps> = ({
     document.body.style.overflow = 'hidden';
     window.addEventListener('keydown', handleKeyDown);
 
-    // Initial focus into modal
+    // Initial focus into modal: prioritize [autofocus] or form fields over close button
     const focusTimeout = setTimeout(() => {
       if (modalRef.current) {
+        const autoFocusEl = modalRef.current.querySelector<HTMLElement>('[autofocus]');
+        if (autoFocusEl) {
+          autoFocusEl.focus();
+          return;
+        }
+
+        const inputEl = modalRef.current.querySelector<HTMLElement>(
+          'input:not([type="hidden"]), textarea, select'
+        );
+        if (inputEl) {
+          inputEl.focus();
+          return;
+        }
+
         const firstFocusable = modalRef.current.querySelector<HTMLElement>(
           'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
         );
@@ -82,7 +99,7 @@ export const Modal: React.FC<ModalProps> = ({
 
   if (!isOpen) return null;
 
-  return (
+  const modalNode = (
     <div
       role="dialog"
       aria-modal="true"
@@ -131,4 +148,10 @@ export const Modal: React.FC<ModalProps> = ({
       </div>
     </div>
   );
+
+  if (usePortal && typeof document !== 'undefined') {
+    return createPortal(modalNode, document.body);
+  }
+
+  return modalNode;
 };

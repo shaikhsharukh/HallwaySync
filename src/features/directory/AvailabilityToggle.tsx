@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '../../components/ui/button';
 import { Modal } from '../../components/ui/modal';
 import { Input } from '../../components/ui/input';
@@ -28,6 +28,18 @@ export const AvailabilityToggle: React.FC<AvailabilityToggleProps> = ({
   const [zone, setZone] = useState(currentZone || '');
   const [isLoading, setIsLoading] = useState(false);
 
+  // Synchronize internal zone state with prop updates
+  useEffect(() => {
+    if (currentZone) {
+      setZone(currentZone);
+    }
+  }, [currentZone]);
+
+  const openModal = () => {
+    setZone(currentZone || '');
+    setIsModalOpen(true);
+  };
+
   const handleToggle = async () => {
     if (isAvailable) {
       // Turn off
@@ -39,8 +51,7 @@ export const AvailabilityToggle: React.FC<AvailabilityToggleProps> = ({
       }
     } else {
       // Open modal to specify zone
-      setZone(currentZone || '');
-      setIsModalOpen(true);
+      openModal();
     }
   };
 
@@ -82,11 +93,11 @@ export const AvailabilityToggle: React.FC<AvailabilityToggleProps> = ({
 
         {isAvailable && currentZone && (
           <button
-            onClick={() => setIsModalOpen(true)}
+            onClick={openModal}
             className="min-h-[44px] px-2 sm:px-3 py-1.5 rounded-xl bg-surface-card border border-surface-border text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white text-xs flex items-center gap-1"
             title="Update physical location zone"
           >
-            <MapPin className="w-3.5 h-3.5 text-brand-400 shrink-0" />
+            <MapPin className="w-3.5 h-3.5 text-brand-500 dark:text-brand-400 shrink-0" />
             <span className="truncate max-w-[70px] sm:max-w-[120px]">{currentZone}</span>
           </button>
         )}
@@ -98,6 +109,7 @@ export const AvailabilityToggle: React.FC<AvailabilityToggleProps> = ({
         onClose={() => setIsModalOpen(false)}
         title="In-Person Availability Status"
         description="Let people know you are open to chat in person right now. Auto-expires after 60 minutes."
+        usePortal
       >
         <form onSubmit={handleConfirmAvailability} className="space-y-4 pt-2">
           <Input
@@ -110,7 +122,7 @@ export const AvailabilityToggle: React.FC<AvailabilityToggleProps> = ({
           />
 
           <div>
-            <span className="block text-[11px] font-medium text-slate-500 dark:text-slate-400 mb-2">
+            <span className="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-2">
               Quick select popular event areas:
             </span>
             <div className="flex flex-wrap gap-1.5">
@@ -121,8 +133,8 @@ export const AvailabilityToggle: React.FC<AvailabilityToggleProps> = ({
                   onClick={() => setZone(item)}
                   className={`text-xs px-2.5 py-1.5 rounded-lg border text-left transition-colors ${
                     zone === item
-                      ? 'bg-brand-500/20 text-brand-700 dark:text-brand-300 border-brand-500'
-                      : 'bg-surface-raised border-surface-border text-slate-700 dark:text-slate-300 hover:border-slate-500'
+                      ? 'bg-brand-500/15 text-brand-800 dark:text-brand-300 border-brand-500 font-semibold ring-1 ring-brand-500/30'
+                      : 'bg-slate-100 dark:bg-surface-raised border-slate-200 dark:border-surface-border text-slate-700 dark:text-slate-300 hover:border-slate-400 dark:hover:border-slate-500 hover:bg-slate-200/60 dark:hover:bg-surface-hover'
                   }`}
                 >
                   {item}
@@ -131,15 +143,38 @@ export const AvailabilityToggle: React.FC<AvailabilityToggleProps> = ({
             </div>
           </div>
 
-          <div className="flex items-center gap-1.5 text-[11px] text-slate-400 pt-2">
-            <Clock className="w-3.5 h-3.5 text-brand-400" />
+          <div className="flex items-center gap-1.5 text-[11px] text-slate-600 dark:text-slate-400 pt-1">
+            <Clock className="w-3.5 h-3.5 text-brand-600 dark:text-brand-400 shrink-0" />
             <span>Resets automatically to standard status in 60 minutes</span>
           </div>
 
-          <Button type="submit" size="md" isLoading={isLoading} className="w-full">
-            <Check className="w-4 h-4 mr-1" />
-            <span>Set Status: Available to Chat</span>
-          </Button>
+          <div className="space-y-2 pt-1">
+            <Button type="submit" size="md" isLoading={isLoading} className="w-full">
+              <Check className="w-4 h-4 mr-1" />
+              <span>Set Status: Available to Chat</span>
+            </Button>
+
+            {isAvailable && (
+              <Button
+                type="button"
+                variant="outline"
+                size="md"
+                disabled={isLoading}
+                onClick={async () => {
+                  setIsLoading(true);
+                  try {
+                    await onUpdate(false, null);
+                    setIsModalOpen(false);
+                  } finally {
+                    setIsLoading(false);
+                  }
+                }}
+                className="w-full text-slate-600 dark:text-slate-300 hover:text-rose-600 dark:hover:text-rose-400"
+              >
+                Turn Off Available Status
+              </Button>
+            )}
+          </div>
         </form>
       </Modal>
     </>
