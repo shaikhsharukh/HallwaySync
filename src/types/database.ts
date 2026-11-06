@@ -200,6 +200,15 @@ export interface Database {
           created_at: string;
         };
       };
+      cleanup_expired_rooms: {
+        Args: {
+          p_expiry_hours?: number;
+        };
+        Returns: {
+          deactivated_count: number;
+          purged_count: number;
+        }[];
+      };
     };
   };
 }

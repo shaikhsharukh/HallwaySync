@@ -160,27 +160,27 @@ export const OrganizerDashboardPage: React.FC<OrganizerDashboardPageProps> = ({
         </div>
 
         <div className="p-4 bg-surface-card border border-surface-border rounded-2xl shadow-card">
-          <div className="flex items-center gap-2 text-slate-400 text-xs font-medium">
-            <Activity className="w-4 h-4 text-emerald-400" />
+          <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-xs font-medium">
+            <Activity className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
             <span>Active & Available</span>
           </div>
-          <p className="text-2xl sm:text-3xl font-extrabold text-emerald-400 mt-2">
+          <p className="text-2xl sm:text-3xl font-extrabold text-emerald-600 dark:text-emerald-400 mt-2">
             {analytics.activeNow}
           </p>
-          <span className="text-[10px] text-slate-400 font-mono mt-0.5 block">
+          <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono mt-0.5 block">
             Status: Available to chat
           </span>
         </div>
 
         <div className="col-span-2 sm:col-span-1 p-4 bg-surface-card border border-surface-border rounded-2xl shadow-card">
-          <div className="flex items-center gap-2 text-slate-400 text-xs font-medium">
-            <Layers className="w-4 h-4 text-sky-400" />
+          <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-xs font-medium">
+            <Layers className="w-4 h-4 text-sky-600 dark:text-sky-400" />
             <span>Distinct Skills</span>
           </div>
-          <p className="text-2xl sm:text-3xl font-extrabold text-sky-400 mt-2">
+          <p className="text-2xl sm:text-3xl font-extrabold text-sky-600 dark:text-sky-400 mt-2">
             {analytics.topSkills.length}
           </p>
-          <span className="text-xs text-slate-400 font-mono mt-0.5 block">
+          <span className="text-xs text-slate-500 dark:text-slate-400 font-mono mt-0.5 block">
             Unique tech competencies
           </span>
         </div>
