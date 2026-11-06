@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-surface-base: #f5f5f7;
+  --color-surface-card: #ffffff;
+  --color-surface-raised: #ffffff;
+  --color-surface-hover: #f1f5f9;
+  --color-surface-border: #e2e8f0;
+  --color-surface-highlight: #e2e8f0;
+}
+
+.dark {
+  --color-surface-base: #0c0e12;
+  --color-surface-card: #14171f;
+  --color-surface-raised: #1b202a;
+  --color-surface-hover: #242b38;
+  --color-surface-border: #2a3242;
+  --color-surface-highlight: #363f52;
+}
+
 @layer utilities {
   /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {

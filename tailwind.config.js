@@ -19,12 +19,12 @@ export default {
           950: '#022c22',
         },
         surface: {
-          base: '#0c0e12',
-          card: '#14171f',
-          raised: '#1b202a',
-          hover: '#242b38',
-          border: '#2a3242',
-          highlight: '#363f52',
+          base: 'var(--color-surface-base)',
+          card: 'var(--color-surface-card)',
+          raised: 'var(--color-surface-raised)',
+          hover: 'var(--color-surface-hover)',
+          border: 'var(--color-surface-border)',
+          highlight: 'var(--color-surface-highlight)',
         },
       },
       fontFamily: {
