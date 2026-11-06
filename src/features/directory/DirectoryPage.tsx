@@ -81,11 +81,11 @@ export const DirectoryPage: React.FC<DirectoryPageProps> = ({
       />
 
       {/* Directory Stats Bar */}
-      <div className="flex items-center justify-between text-xs text-slate-400 px-1">
+      <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 px-1">
         <div className="flex items-center gap-1.5 font-medium">
           <Users className="w-3.5 h-3.5 text-brand-400" />
           <span>
-            Showing <strong className="text-slate-200">{filteredAttendees.length}</strong> of{' '}
+            Showing <strong className="text-slate-900 dark:text-slate-200">{filteredAttendees.length}</strong> of{' '}
             {attendees.length} attendees
           </span>
         </div>
@@ -93,7 +93,7 @@ export const DirectoryPage: React.FC<DirectoryPageProps> = ({
         {onRefresh && (
           <button
             onClick={onRefresh}
-            className="flex items-center gap-1 hover:text-slate-200 transition-colors"
+            className="flex items-center gap-1 hover:text-slate-900 dark:hover:text-slate-200 transition-colors"
             title="Refresh directory"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? 'animate-spin' : ''}`} />
@@ -125,8 +125,8 @@ export const DirectoryPage: React.FC<DirectoryPageProps> = ({
       ) : (
         <div className="text-center py-12 px-4 bg-surface-card border border-surface-border rounded-2xl">
           <Sparkles className="w-8 h-8 text-slate-500 mx-auto mb-2" />
-          <h4 className="text-sm font-semibold text-slate-200">No attendees found</h4>
-          <p className="text-xs text-slate-400 mt-1 max-w-xs mx-auto">
+          <h4 className="text-sm font-semibold text-slate-900 dark:text-slate-200">No attendees found</h4>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-xs mx-auto">
             Try adjusting your search query, clearing your filters, or waiting for newcomers to scan the room QR.
           </p>
         </div>

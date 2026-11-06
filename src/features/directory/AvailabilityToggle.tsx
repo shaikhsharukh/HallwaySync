@@ -63,8 +63,8 @@ export const AvailabilityToggle: React.FC<AvailabilityToggleProps> = ({
           disabled={isLoading}
           className={`min-h-[44px] px-2.5 sm:px-3.5 py-2 rounded-xl border flex items-center gap-1.5 sm:gap-2 text-xs font-semibold transition-all select-none ${
             isAvailable
-              ? 'bg-emerald-500/15 border-emerald-500 text-emerald-300 shadow-emerald'
-              : 'bg-surface-card border-surface-border text-slate-300 hover:border-slate-500'
+              ? 'bg-emerald-500/15 border-emerald-500 text-emerald-700 dark:text-emerald-300 shadow-emerald'
+              : 'bg-surface-card border-surface-border text-slate-700 dark:text-slate-300 hover:border-slate-500'
           }`}
         >
           <span
@@ -83,7 +83,7 @@ export const AvailabilityToggle: React.FC<AvailabilityToggleProps> = ({
         {isAvailable && currentZone && (
           <button
             onClick={() => setIsModalOpen(true)}
-            className="min-h-[44px] px-2 sm:px-3 py-1.5 rounded-xl bg-surface-card border border-surface-border text-slate-300 hover:text-white text-xs flex items-center gap-1"
+            className="min-h-[44px] px-2 sm:px-3 py-1.5 rounded-xl bg-surface-card border border-surface-border text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white text-xs flex items-center gap-1"
             title="Update physical location zone"
           >
             <MapPin className="w-3.5 h-3.5 text-brand-400 shrink-0" />
@@ -110,7 +110,7 @@ export const AvailabilityToggle: React.FC<AvailabilityToggleProps> = ({
           />
 
           <div>
-            <span className="block text-[11px] font-medium text-slate-400 mb-2">
+            <span className="block text-[11px] font-medium text-slate-500 dark:text-slate-400 mb-2">
               Quick select popular event areas:
             </span>
             <div className="flex flex-wrap gap-1.5">
@@ -121,8 +121,8 @@ export const AvailabilityToggle: React.FC<AvailabilityToggleProps> = ({
                   onClick={() => setZone(item)}
                   className={`text-xs px-2.5 py-1.5 rounded-lg border text-left transition-colors ${
                     zone === item
-                      ? 'bg-brand-500/20 text-brand-300 border-brand-500'
-                      : 'bg-surface-raised border-surface-border text-slate-300 hover:border-slate-500'
+                      ? 'bg-brand-500/20 text-brand-700 dark:text-brand-300 border-brand-500'
+                      : 'bg-surface-raised border-surface-border text-slate-700 dark:text-slate-300 hover:border-slate-500'
                   }`}
                 >
                   {item}

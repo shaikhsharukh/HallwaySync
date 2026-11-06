@@ -146,7 +146,7 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({
           <span className="text-xs font-mono uppercase tracking-wider text-brand-400 font-semibold">
             {isEditing ? 'Profile Editor' : `${roomCategory} Join Wizard`}
           </span>
-          <h2 className="text-xl font-bold text-slate-100 mt-0.5 truncate max-w-[260px]">
+          <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100 mt-0.5 truncate max-w-[260px]">
             {isEditing ? 'Edit Your Badge' : roomTitle}
           </h2>
         </div>
@@ -167,7 +167,7 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({
       </div>
 
       {error && (
-        <div className="mb-5 p-3.5 bg-rose-500/10 border border-rose-500/30 rounded-xl text-rose-300 text-xs">
+        <div className="mb-5 p-3.5 bg-rose-500/10 border border-rose-500/30 rounded-xl text-rose-600 dark:text-rose-300 text-xs">
           {error}
         </div>
       )}
@@ -178,9 +178,9 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({
           <div>
             <div className="flex items-center gap-2 mb-1">
               <User className="w-4 h-4 text-brand-400" />
-              <h3 className="text-sm font-semibold text-slate-100">Who are you?</h3>
+              <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">Who are you?</h3>
             </div>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               Your name and role displayed to people at this event.
             </p>
           </div>
@@ -195,7 +195,7 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({
           />
 
           <div>
-            <label className="block text-xs font-medium text-slate-300 mb-2">
+            <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-2">
               Primary Role *
             </label>
             <div className="grid grid-cols-3 gap-2">
@@ -208,8 +208,8 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({
                     onClick={() => setRole(r)}
                     className={`min-h-[44px] px-2.5 py-2 rounded-xl text-xs font-medium border text-center transition-all select-none ${
                       isSelected
-                        ? 'bg-brand-500/15 border-brand-500 text-brand-300 font-semibold shadow-emerald'
-                        : 'bg-surface-raised border-surface-border text-slate-300 hover:border-slate-500'
+                        ? 'bg-brand-500/15 border-brand-500 text-brand-700 dark:text-brand-300 font-semibold shadow-emerald'
+                        : 'bg-surface-raised border-surface-border text-slate-700 dark:text-slate-300 hover:border-slate-500'
                     }`}
                   >
                     {r}
@@ -247,9 +247,9 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({
           <div>
             <div className="flex items-center gap-2 mb-1">
               <Code2 className="w-4 h-4 text-brand-400" />
-              <h3 className="text-sm font-semibold text-slate-100">Tech Stack & Skills</h3>
+              <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">Tech Stack & Skills</h3>
             </div>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               Pick 2 to 6 tags so others can discover and match with you.
             </p>
           </div>
@@ -265,7 +265,7 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({
                   className={`min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-medium border flex items-center gap-1.5 transition-all select-none ${
                     isSelected
                       ? 'bg-brand-500 text-slate-950 border-brand-500 font-semibold shadow-emerald'
-                      : 'bg-surface-raised text-slate-300 border-surface-border hover:border-slate-500'
+                      : 'bg-surface-raised text-slate-700 dark:text-slate-300 border-surface-border hover:border-slate-500'
                   }`}
                 >
                   {isSelected && <Check className="w-3.5 h-3.5 stroke-[3]" />}
@@ -281,7 +281,7 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({
               placeholder="Add other tag (e.g. GraphQL)..."
               value={customSkill}
               onChange={(e) => setCustomSkill(e.target.value)}
-              className="flex-1 min-h-[44px] px-3.5 bg-surface-raised border border-surface-border rounded-xl text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500"
+              className="flex-1 min-h-[44px] px-3.5 bg-surface-raised border border-surface-border rounded-xl text-xs text-slate-900 dark:text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500"
               maxLength={30}
             />
             <Button type="submit" variant="secondary" size="sm" className="min-h-[44px]">
@@ -307,15 +307,15 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({
           <div>
             <div className="flex items-center gap-2 mb-1">
               <Target className="w-4 h-4 text-brand-400" />
-              <h3 className="text-sm font-semibold text-slate-100">Intent & Social Link</h3>
+              <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">Intent & Social Link</h3>
             </div>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               What brings you here, and how can mutual connections reach you?
             </p>
           </div>
 
           <div className="space-y-2">
-            <label className="block text-xs font-medium text-slate-300">
+            <label className="block text-xs font-medium text-slate-700 dark:text-slate-300">
               I am here to... *
             </label>
             {INTENTS.map((item) => {
@@ -327,8 +327,8 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({
                   onClick={() => toggleIntent(item)}
                   className={`w-full min-h-[44px] px-3.5 py-2.5 rounded-xl text-xs font-medium border flex items-center justify-between text-left transition-all ${
                     isSelected
-                      ? 'bg-brand-500/15 border-brand-500 text-brand-300 font-semibold'
-                      : 'bg-surface-raised border-surface-border text-slate-300 hover:border-slate-500'
+                      ? 'bg-brand-500/15 border-brand-500 text-brand-700 dark:text-brand-300 font-semibold'
+                      : 'bg-surface-raised border-surface-border text-slate-700 dark:text-slate-300 hover:border-slate-500'
                   }`}
                 >
                   <span>{item}</span>

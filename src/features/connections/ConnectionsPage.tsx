@@ -65,12 +65,12 @@ export const ConnectionsPage: React.FC<ConnectionsPageProps> = ({
           onClick={() => setActiveTab('connected')}
           className={`min-h-[44px] flex-1 pb-3 text-xs sm:text-sm font-semibold border-b-2 transition-colors flex items-center justify-center gap-2 ${
             activeTab === 'connected'
-              ? 'border-brand-500 text-brand-400'
-              : 'border-transparent text-slate-400 hover:text-slate-200'
+              ? 'border-brand-500 text-brand-600 dark:text-brand-400'
+              : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
           }`}
         >
           <span>Mutual Connections</span>
-          <span className="px-1.5 py-0.5 rounded-full text-[10px] bg-brand-500/20 text-brand-300 font-bold">
+          <span className="px-1.5 py-0.5 rounded-full text-[10px] bg-brand-500/20 text-brand-700 dark:text-brand-300 font-bold">
             {mutualConnections.length}
           </span>
         </button>
@@ -78,13 +78,13 @@ export const ConnectionsPage: React.FC<ConnectionsPageProps> = ({
           onClick={() => setActiveTab('pending')}
           className={`min-h-[44px] flex-1 pb-3 text-xs sm:text-sm font-semibold border-b-2 transition-colors flex items-center justify-center gap-2 ${
             activeTab === 'pending'
-              ? 'border-brand-500 text-brand-400'
-              : 'border-transparent text-slate-400 hover:text-slate-200'
+              ? 'border-brand-500 text-brand-600 dark:text-brand-400'
+              : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
           }`}
         >
           <span>Waves Sent & Received</span>
           {pendingWaves.length > 0 && (
-            <span className="px-1.5 py-0.5 rounded-full text-[10px] bg-surface-raised border border-surface-border text-slate-300 font-bold">
+            <span className="px-1.5 py-0.5 rounded-full text-[10px] bg-surface-raised border border-surface-border text-slate-700 dark:text-slate-300 font-bold">
               {pendingWaves.length}
             </span>
           )}
@@ -113,7 +113,7 @@ export const ConnectionsPage: React.FC<ConnectionsPageProps> = ({
                       isAvailable={partner.is_available_to_chat}
                     />
                     <div className="min-w-0">
-                      <h4 className="text-sm font-bold text-slate-100 truncate">
+                      <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100 truncate">
                         {partner.display_name}
                       </h4>
                       <div className="flex items-center gap-1.5 mt-0.5">
@@ -121,7 +121,7 @@ export const ConnectionsPage: React.FC<ConnectionsPageProps> = ({
                           {partner.role}
                         </Badge>
                         {partner.current_zone && (
-                          <span className="text-[11px] text-slate-400 truncate">
+                          <span className="text-[11px] text-slate-500 dark:text-slate-400 truncate">
                             • {partner.current_zone}
                           </span>
                         )}
@@ -168,7 +168,7 @@ export const ConnectionsPage: React.FC<ConnectionsPageProps> = ({
                         href={`https://github.com/${partner.avatar_github.replace('@', '')}`}
                         target="_blank"
                         rel="noreferrer"
-                        className="min-h-[44px] min-w-[44px] flex items-center justify-center bg-surface-raised border border-surface-border text-slate-300 hover:text-white rounded-xl"
+                        className="min-h-[44px] min-w-[44px] flex items-center justify-center bg-surface-raised border border-surface-border text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white rounded-xl"
                         title="GitHub profile"
                       >
                         <Github className="w-4 h-4" />
@@ -181,8 +181,8 @@ export const ConnectionsPage: React.FC<ConnectionsPageProps> = ({
           ) : (
             <div className="text-center py-12 px-4 bg-surface-card border border-surface-border rounded-2xl">
               <Users className="w-8 h-8 text-slate-500 mx-auto mb-2" />
-              <h4 className="text-sm font-semibold text-slate-200">No mutual connections yet</h4>
-              <p className="text-xs text-slate-400 mt-1 max-w-xs mx-auto">
+              <h4 className="text-sm font-semibold text-slate-900 dark:text-slate-200">No mutual connections yet</h4>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-xs mx-auto">
                 Wave at people in the directory or scan their QR badge to unlock direct contact channels.
               </p>
             </div>
@@ -210,10 +210,10 @@ export const ConnectionsPage: React.FC<ConnectionsPageProps> = ({
                       size="md"
                     />
                     <div className="min-w-0">
-                      <h4 className="text-sm font-bold text-slate-100 truncate">
+                      <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100 truncate">
                         {partner.display_name}
                       </h4>
-                      <p className="text-xs text-slate-400">
+                      <p className="text-xs text-slate-500 dark:text-slate-400">
                         {isIncoming
                           ? `${partner.display_name} waved at you 👋`
                           : 'You waved • Waiting for response'}
@@ -237,8 +237,8 @@ export const ConnectionsPage: React.FC<ConnectionsPageProps> = ({
           ) : (
             <div className="text-center py-12 px-4 bg-surface-card border border-surface-border rounded-2xl">
               <HandMetal className="w-8 h-8 text-slate-500 mx-auto mb-2" />
-              <h4 className="text-sm font-semibold text-slate-200">No pending waves</h4>
-              <p className="text-xs text-slate-400 mt-1">
+              <h4 className="text-sm font-semibold text-slate-900 dark:text-slate-200">No pending waves</h4>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                 Explore the room directory and wave at fellow builders!
               </p>
             </div>

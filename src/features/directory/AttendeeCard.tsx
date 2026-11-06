@@ -43,11 +43,11 @@ export const AttendeeCard: React.FC<AttendeeCardProps> = ({
             />
             <div className="min-w-0">
               <div className="flex items-center gap-1.5 flex-wrap">
-                <h3 className="text-sm font-bold text-slate-100 truncate group-hover:text-brand-300 transition-colors">
+                <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 truncate group-hover:text-brand-600 dark:group-hover:text-brand-300 transition-colors">
                   {attendee.display_name}
                 </h3>
                 {isSelf && (
-                  <span className="text-xs font-mono uppercase px-1.5 py-0.5 rounded bg-brand-500/20 text-brand-300 font-semibold">
+                  <span className="text-xs font-mono uppercase px-1.5 py-0.5 rounded bg-brand-500/20 text-brand-700 dark:text-brand-300 font-semibold">
                     You
                   </span>
                 )}
@@ -58,7 +58,7 @@ export const AttendeeCard: React.FC<AttendeeCardProps> = ({
                 </Badge>
                 {attendee.is_available_to_chat && (
                   <Badge variant="availability">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
                     <span>Available</span>
                   </Badge>
                 )}
@@ -79,7 +79,7 @@ export const AttendeeCard: React.FC<AttendeeCardProps> = ({
                 type="button"
                 size="sm"
                 variant="ghost"
-                className="min-h-[44px] px-3 border border-surface-border hover:bg-surface-raised text-slate-300 hover:text-white"
+                className="min-h-[44px] px-3 border border-surface-border hover:bg-surface-raised text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
                 title="Edit your badge & profile"
               >
                 <Pencil className="w-3.5 h-3.5 text-brand-400 mr-1" />
@@ -131,7 +131,7 @@ export const AttendeeCard: React.FC<AttendeeCardProps> = ({
 
         {/* Headline */}
         {attendee.headline && (
-          <p className="text-xs text-slate-300 mt-2 line-clamp-1">
+          <p className="text-xs text-slate-600 dark:text-slate-300 mt-2 line-clamp-1">
             {attendee.headline}
           </p>
         )}
@@ -143,7 +143,7 @@ export const AttendeeCard: React.FC<AttendeeCardProps> = ({
           {attendee.skills.slice(0, 3).map((skill) => (
             <span
               key={skill}
-              className="text-xs font-medium px-2 py-0.5 rounded-md bg-surface-raised border border-surface-border text-slate-300"
+              className="text-xs font-medium px-2 py-0.5 rounded-md bg-surface-raised border border-surface-border text-slate-700 dark:text-slate-300"
             >
               {skill}
             </span>

@@ -89,12 +89,12 @@ export const QRBadgeScanner: React.FC<QRBadgeScannerProps> = ({
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Scan In-Person Badge">
       <div className="space-y-4 text-center">
-        <p className="text-xs text-slate-400">
+        <p className="text-xs text-slate-500 dark:text-slate-400">
           Point your phone camera at another attendee's "My Badge" QR code.
         </p>
 
         {error ? (
-          <div className="p-4 bg-rose-500/10 border border-rose-500/30 rounded-2xl text-rose-300 text-xs space-y-2">
+          <div className="p-4 bg-rose-500/10 border border-rose-500/30 rounded-2xl text-rose-700 dark:text-rose-300 text-xs space-y-2">
             <AlertCircle className="w-5 h-5 mx-auto text-rose-400" />
             <p>{error}</p>
             <Button variant="secondary" size="sm" onClick={onClose} className="mt-2">

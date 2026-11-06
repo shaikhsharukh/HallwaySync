@@ -53,7 +53,7 @@ export const DemographicCharts: React.FC<DemographicChartsProps> = ({ analytics 
       <div className="bg-surface-card border border-surface-border p-5 rounded-3xl shadow-card space-y-4">
         <div className="flex items-center gap-2">
           <PieChart className="w-4 h-4 text-brand-400" />
-          <h3 className="text-sm font-bold text-slate-100">Role Composition</h3>
+          <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">Role Composition</h3>
         </div>
 
         <div className="flex flex-col sm:flex-row items-center gap-6">
@@ -65,8 +65,9 @@ export const DemographicCharts: React.FC<DemographicChartsProps> = ({ analytics 
                 cy="100"
                 r="70"
                 fill="none"
-                stroke="#1e2430"
+                stroke="currentColor"
                 strokeWidth="24"
+                className="text-slate-200 dark:text-[#1e2430]"
               />
               {donutSlices.map((slice, i) => (
                 <path
@@ -81,8 +82,8 @@ export const DemographicCharts: React.FC<DemographicChartsProps> = ({ analytics 
               ))}
             </svg>
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-              <span className="text-2xl font-extrabold text-slate-100">{totalAttendees}</span>
-              <span className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">
+              <span className="text-2xl font-extrabold text-slate-900 dark:text-slate-100">{totalAttendees}</span>
+              <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">
                 Attendees
               </span>
             </div>
@@ -97,11 +98,11 @@ export const DemographicCharts: React.FC<DemographicChartsProps> = ({ analytics 
                     className="w-2.5 h-2.5 rounded-full shrink-0"
                     style={{ backgroundColor: slice.color }}
                   />
-                  <span className="text-slate-300 truncate">{slice.role}</span>
+                  <span className="text-slate-700 dark:text-slate-300 truncate">{slice.role}</span>
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
-                  <span className="text-slate-400">{slice.count}</span>
-                  <span className="font-semibold text-slate-200 min-w-[32px] text-right">
+                  <span className="text-slate-500 dark:text-slate-400">{slice.count}</span>
+                  <span className="font-semibold text-slate-900 dark:text-slate-200 min-w-[32px] text-right">
                     {slice.percentage}%
                   </span>
                 </div>
@@ -115,7 +116,7 @@ export const DemographicCharts: React.FC<DemographicChartsProps> = ({ analytics 
       <div className="bg-surface-card border border-surface-border p-5 rounded-3xl shadow-card space-y-4">
         <div className="flex items-center gap-2">
           <BarChart2 className="w-4 h-4 text-brand-400" />
-          <h3 className="text-sm font-bold text-slate-100">Participant Intent Breakdown</h3>
+          <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">Participant Intent Breakdown</h3>
         </div>
 
         <div className="space-y-3">
@@ -124,10 +125,10 @@ export const DemographicCharts: React.FC<DemographicChartsProps> = ({ analytics 
             return (
               <div key={intent} className="space-y-1">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="text-slate-300 font-medium truncate max-w-[200px]">
+                  <span className="text-slate-700 dark:text-slate-300 font-medium truncate max-w-[200px]">
                     {intent}
                   </span>
-                  <span className="text-slate-400 font-semibold">{count} ({pct}%)</span>
+                  <span className="text-slate-500 dark:text-slate-400 font-semibold">{count} ({pct}%)</span>
                 </div>
                 <div className="w-full h-2 bg-surface-raised rounded-full overflow-hidden border border-surface-border">
                   <div
@@ -145,17 +146,17 @@ export const DemographicCharts: React.FC<DemographicChartsProps> = ({ analytics 
       <div className="md:col-span-2 bg-surface-card border border-surface-border p-5 rounded-3xl shadow-card space-y-3">
         <div className="flex items-center gap-2">
           <Tag className="w-4 h-4 text-brand-400" />
-          <h3 className="text-sm font-bold text-slate-100">Top Technical Skills Matrix</h3>
+          <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">Top Technical Skills Matrix</h3>
         </div>
 
         <div className="flex flex-wrap gap-2 pt-1">
           {topSkills.slice(0, 15).map(({ tag, count }) => (
             <div
               key={tag}
-              className="px-3 py-1.5 rounded-xl bg-surface-raised border border-surface-border flex items-center gap-2 text-xs font-medium text-slate-200"
+              className="px-3 py-1.5 rounded-xl bg-surface-raised border border-surface-border flex items-center gap-2 text-xs font-medium text-slate-700 dark:text-slate-200"
             >
               <span>{tag}</span>
-              <span className="text-[10px] font-bold px-1.5 py-0.2 rounded-full bg-brand-500/20 text-brand-300">
+              <span className="text-[10px] font-bold px-1.5 py-0.2 rounded-full bg-brand-500/15 dark:bg-brand-500/20 text-brand-700 dark:text-brand-300">
                 {count}
               </span>
             </div>

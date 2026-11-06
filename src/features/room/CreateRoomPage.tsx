@@ -271,8 +271,8 @@ export const CreateRoomPage: React.FC<CreateRoomPageProps> = ({ onRoomCreated })
                 <span>Launch Room & Generate Stage QR Code</span>
                 <ArrowRight className="w-4 h-4 ml-1.5" />
               </Button>
-              <p className="text-center text-[11px] text-slate-400 font-mono">
-                Tip: Press <kbd className="px-1.5 py-0.5 bg-surface-raised border border-surface-border rounded text-slate-300">⌘+Enter</kbd> to launch immediately
+              <p className="text-center text-[11px] text-slate-500 dark:text-slate-400 font-mono">
+                Tip: Press <kbd className="px-1.5 py-0.5 bg-surface-raised border border-surface-border rounded text-slate-700 dark:text-slate-300">⌘+Enter</kbd> to launch immediately
               </p>
             </div>
           </form>
@@ -290,33 +290,33 @@ export const CreateRoomPage: React.FC<CreateRoomPageProps> = ({ onRoomCreated })
                   Stage Screen Preview
                 </span>
               </div>
-              <span className="text-[11px] font-mono text-slate-400">16:9 Display</span>
+              <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400">16:9 Display</span>
             </div>
 
             {/* MOCK PROJECTOR MONITOR FRAME */}
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-center space-y-3 shadow-inner">
-              <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-brand-500/20 text-brand-300 text-[11px] font-mono">
+            <div className="p-4 rounded-xl bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-center space-y-3 shadow-inner">
+              <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-brand-500/10 dark:bg-brand-500/20 text-brand-700 dark:text-brand-300 text-[11px] font-mono">
                 <span>{activeCategory.label} Live Hall</span>
               </div>
 
               <div className="space-y-1 px-2">
-                <h3 className="text-base font-bold text-white tracking-tight line-clamp-1">
+                <h3 className="text-base font-bold text-slate-900 dark:text-white tracking-tight line-clamp-1">
                   {title.trim() || 'Your Event Title Will Appear Here'}
                 </h3>
-                <p className="text-[11px] text-slate-400 line-clamp-1">
+                <p className="text-[11px] text-slate-600 dark:text-slate-400 line-clamp-1">
                   {description.trim() || 'Attendees scan below to enter directory & match teams.'}
                 </p>
               </div>
 
               {/* MOCK QR CODE CONTAINER */}
-              <div className="w-28 h-28 mx-auto p-2 bg-white rounded-xl shadow-lg flex flex-col items-center justify-center">
+              <div className="w-28 h-28 mx-auto p-2 bg-white rounded-xl border border-slate-200 dark:border-slate-800 shadow-md flex flex-col items-center justify-center">
                 <QrCode className="w-20 h-20 text-slate-950" />
                 <span className="text-[8px] font-mono font-bold text-slate-700 uppercase tracking-tighter">
                   Scan to Join
                 </span>
               </div>
 
-              <p className="text-xs text-brand-400 font-medium">
+              <p className="text-xs text-brand-600 dark:text-brand-400 font-medium">
                 &lt;45s Phone Setup • Zero App Downloads
               </p>
             </div>

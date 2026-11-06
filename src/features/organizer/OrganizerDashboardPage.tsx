@@ -96,14 +96,14 @@ export const OrganizerDashboardPage: React.FC<OrganizerDashboardPageProps> = ({
             <span>Back to Projector QR Lobby</span>
           </button>
           <div className="flex items-center gap-2.5">
-            <h1 className="text-xl sm:text-2xl font-extrabold text-slate-100">
+            <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-slate-100">
               {room.title}
             </h1>
             <Badge variant="brand" className="uppercase font-mono text-[10px]">
               Command Center
             </Badge>
           </div>
-          <p className="text-xs text-slate-400 mt-0.5">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
             Live demographic intelligence, stage broadcast alerts, and participant moderation.
           </p>
         </div>
@@ -122,23 +122,23 @@ export const OrganizerDashboardPage: React.FC<OrganizerDashboardPageProps> = ({
       </div>
 
       {/* INTUITIVE PURPOSE BANNER */}
-      <div className="p-4 bg-surface-card border border-surface-border rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-slate-300">
+      <div className="p-4 bg-surface-card border border-surface-border rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-slate-700 dark:text-slate-300">
         <div className="flex items-start gap-2.5">
-          <div className="p-2 rounded-xl bg-brand-500/10 text-brand-400 shrink-0 mt-0.5">
+          <div className="p-2 rounded-xl bg-brand-500/10 text-brand-600 dark:text-brand-400 shrink-0 mt-0.5">
             <Info className="w-4 h-4" />
           </div>
           <div>
-            <span className="font-bold text-slate-100 block mb-0.5">
+            <span className="font-bold text-slate-900 dark:text-slate-100 block mb-0.5">
               How the Organizer Center Works
             </span>
-            <span className="text-slate-400 leading-relaxed block">
+            <span className="text-slate-500 dark:text-slate-400 leading-relaxed block">
               You have full operational control over this room: broadcast instant banners to all active phone screens, review technical role balance to guide mentors, and moderate participants.
             </span>
           </div>
         </div>
-        <div className="flex items-center gap-3 shrink-0 text-[11px] font-mono text-slate-400 border-t sm:border-t-0 sm:border-l border-surface-border pt-2 sm:pt-0 sm:pl-3">
-          <span className="flex items-center gap-1 text-emerald-400">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+        <div className="flex items-center gap-3 shrink-0 text-[11px] font-mono text-slate-500 dark:text-slate-400 border-t sm:border-t-0 sm:border-l border-surface-border pt-2 sm:pt-0 sm:pl-3">
+          <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-medium">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
             Realtime Connected
           </span>
         </div>
@@ -147,14 +147,14 @@ export const OrganizerDashboardPage: React.FC<OrganizerDashboardPageProps> = ({
       {/* METRIC CARDS ROW */}
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3.5">
         <div className="p-4 bg-surface-card border border-surface-border rounded-2xl shadow-card">
-          <div className="flex items-center gap-2 text-slate-400 text-xs font-medium">
+          <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-xs font-medium">
             <Users className="w-4 h-4 text-brand-400" />
             <span>Total Registered</span>
           </div>
-          <p className="text-2xl sm:text-3xl font-extrabold text-slate-100 mt-2">
+          <p className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-slate-100 mt-2">
             {analytics.totalAttendees}
           </p>
-          <span className="text-[10px] text-slate-400 font-mono mt-0.5 block">
+          <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono mt-0.5 block">
             Joined via mobile QR scan
           </span>
         </div>
@@ -194,21 +194,21 @@ export const OrganizerDashboardPage: React.FC<OrganizerDashboardPageProps> = ({
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Megaphone className="w-4 h-4 text-brand-400" />
-            <h3 className="text-sm font-bold text-slate-100">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">
               Broadcast Real-Time Stage Announcement
             </h3>
           </div>
-          <span className="text-[10px] font-mono text-brand-400 px-2 py-0.5 rounded-full bg-brand-500/10">
+          <span className="text-[10px] font-mono text-brand-700 dark:text-brand-400 px-2 py-0.5 rounded-full bg-brand-500/10">
             Instant Push to Attendees
           </span>
         </div>
-        <p className="text-xs text-slate-400 leading-relaxed">
+        <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
           Pushes an immediate, sticky notification banner to the top of every attendee screen currently in this networking hall via Supabase Realtime broadcast.
         </p>
 
         {/* 1-CLICK QUICK TEMPLATES */}
         <div className="space-y-1.5 pt-1">
-          <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider font-mono">
+          <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-mono">
             Quick Templates (Click to fill):
           </span>
           <div className="flex flex-wrap gap-2">
@@ -220,7 +220,7 @@ export const OrganizerDashboardPage: React.FC<OrganizerDashboardPageProps> = ({
                   setAnnouncementTitle(tmpl.title);
                   setAnnouncementMessage(tmpl.message);
                 }}
-                className="text-xs px-2.5 py-1 bg-surface-raised border border-surface-border hover:border-brand-500 text-slate-300 rounded-xl transition-all"
+                className="text-xs px-2.5 py-1 bg-surface-raised border border-surface-border hover:border-brand-500 text-slate-700 dark:text-slate-300 rounded-xl transition-all"
               >
                 {tmpl.title}
               </button>
@@ -229,7 +229,7 @@ export const OrganizerDashboardPage: React.FC<OrganizerDashboardPageProps> = ({
         </div>
 
         {postSuccess && (
-          <div className="p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-300 text-xs font-semibold">
+          <div className="p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-700 dark:text-emerald-300 text-xs font-semibold">
             ✓ Announcement broadcasted live to all attendee screens!
           </div>
         )}
@@ -269,13 +269,13 @@ export const OrganizerDashboardPage: React.FC<OrganizerDashboardPageProps> = ({
           <div>
             <div className="flex items-center gap-2">
               <Users className="w-4 h-4 text-brand-400" />
-              <h3 className="text-sm font-bold text-slate-100">Live Attendee Roster & Moderation</h3>
+              <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">Live Attendee Roster & Moderation</h3>
             </div>
-            <p className="text-[11px] text-slate-400 mt-0.5">
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
               Banning hides the profile from all participant discovery and directory queries immediately.
             </p>
           </div>
-          <span className="text-xs font-mono text-slate-400 px-2.5 py-1 bg-surface-raised rounded-full border border-surface-border">
+          <span className="text-xs font-mono text-slate-500 dark:text-slate-400 px-2.5 py-1 bg-surface-raised rounded-full border border-surface-border">
             {attendees.length} in roster
           </span>
         </div>
@@ -283,7 +283,7 @@ export const OrganizerDashboardPage: React.FC<OrganizerDashboardPageProps> = ({
         <div className="overflow-x-auto -mx-2 sm:mx-0">
           <table className="w-full text-left text-xs min-w-[500px]">
             <thead>
-              <tr className="border-b border-surface-border text-slate-400 font-mono uppercase text-[10px]">
+              <tr className="border-b border-surface-border text-slate-500 dark:text-slate-400 font-mono uppercase text-[10px]">
                 <th className="py-2.5 px-3">Participant</th>
                 <th className="py-2.5 px-3">Role</th>
                 <th className="py-2.5 px-3">Skills</th>
@@ -294,7 +294,7 @@ export const OrganizerDashboardPage: React.FC<OrganizerDashboardPageProps> = ({
             <tbody className="divide-y divide-surface-border/60">
               {attendees.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="py-8 text-center text-slate-400">
+                  <td colSpan={5} className="py-8 text-center text-slate-500 dark:text-slate-400">
                     No attendees have joined this room yet. Share the stage QR code to begin onboarding!
                   </td>
                 </tr>
@@ -312,11 +312,11 @@ export const OrganizerDashboardPage: React.FC<OrganizerDashboardPageProps> = ({
                           size="sm"
                         />
                         <div className="min-w-0">
-                          <span className="font-semibold text-slate-200 block truncate max-w-[120px]">
+                          <span className="font-semibold text-slate-900 dark:text-slate-200 block truncate max-w-[120px]">
                             {attendee.display_name}
                           </span>
                           {attendee.contact_handle && (
-                            <span className="text-[10px] text-slate-400 font-mono block truncate max-w-[120px]">
+                            <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono block truncate max-w-[120px]">
                               {attendee.contact_handle}
                             </span>
                           )}
@@ -328,12 +328,12 @@ export const OrganizerDashboardPage: React.FC<OrganizerDashboardPageProps> = ({
                         </Badge>
                       </td>
                       <td className="py-3 px-3">
-                        <span className="text-slate-300 line-clamp-1 max-w-[180px]">
+                        <span className="text-slate-700 dark:text-slate-300 line-clamp-1 max-w-[180px]">
                           {attendee.skills.slice(0, 3).join(', ')}
                         </span>
                       </td>
                       <td className="py-3 px-3">
-                        <span className="text-brand-300 line-clamp-1 max-w-[140px]">
+                        <span className="text-brand-700 dark:text-brand-300 line-clamp-1 max-w-[140px]">
                           {attendee.intent.join(', ')}
                         </span>
                       </td>

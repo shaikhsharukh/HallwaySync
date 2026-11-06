@@ -45,11 +45,11 @@ export const MatchmakerPage: React.FC<MatchmakerPageProps> = ({
           <Sparkles className="w-5 h-5" />
         </div>
         <div>
-          <h2 className="text-base font-bold text-slate-100">
+          <h2 className="text-base font-bold text-slate-900 dark:text-slate-100">
             Intelligent {room.category === 'hackathon' ? 'Team' : 'Peer'} Matchmaker
           </h2>
-          <p className="text-xs text-slate-400 mt-1 leading-relaxed">
-            Recommendations calculated by pairing your role (<strong className="text-slate-200">{currentAttendee.role}</strong>) and skills with complementary builders in this room.
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+            Recommendations calculated by pairing your role (<strong className="text-slate-900 dark:text-slate-200">{currentAttendee.role}</strong>) and skills with complementary builders in this room.
           </p>
         </div>
       </div>
@@ -60,13 +60,13 @@ export const MatchmakerPage: React.FC<MatchmakerPageProps> = ({
           onClick={() => setActiveCategory('all')}
           className={`min-h-[44px] flex-1 pb-3 text-xs sm:text-sm font-semibold border-b-2 transition-colors flex items-center justify-center gap-1.5 ${
             activeCategory === 'all'
-              ? 'border-brand-500 text-brand-400'
-              : 'border-transparent text-slate-400 hover:text-slate-200'
+              ? 'border-brand-500 text-brand-600 dark:text-brand-400'
+              : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
           }`}
         >
           <Award className="w-4 h-4" />
           <span>Top Matches</span>
-          <span className="text-[10px] bg-brand-500/20 text-brand-300 px-1.5 py-0.5 rounded-full font-bold">
+          <span className="text-[10px] bg-brand-500/20 text-brand-700 dark:text-brand-300 px-1.5 py-0.5 rounded-full font-bold">
             {allMatches.length}
           </span>
         </button>
@@ -75,8 +75,8 @@ export const MatchmakerPage: React.FC<MatchmakerPageProps> = ({
           onClick={() => setActiveCategory('team')}
           className={`min-h-[44px] flex-1 pb-3 text-xs sm:text-sm font-semibold border-b-2 transition-colors flex items-center justify-center gap-1.5 ${
             activeCategory === 'team'
-              ? 'border-brand-500 text-brand-400'
-              : 'border-transparent text-slate-400 hover:text-slate-200'
+              ? 'border-brand-500 text-brand-600 dark:text-brand-400'
+              : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
           }`}
         >
           <Users className="w-4 h-4" />
@@ -87,8 +87,8 @@ export const MatchmakerPage: React.FC<MatchmakerPageProps> = ({
           onClick={() => setActiveCategory('affinity')}
           className={`min-h-[44px] flex-1 pb-3 text-xs sm:text-sm font-semibold border-b-2 transition-colors flex items-center justify-center gap-1.5 ${
             activeCategory === 'affinity'
-              ? 'border-brand-500 text-brand-400'
-              : 'border-transparent text-slate-400 hover:text-slate-200'
+              ? 'border-brand-500 text-brand-600 dark:text-brand-400'
+              : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
           }`}
         >
           <Sparkles className="w-4 h-4" />
@@ -106,11 +106,11 @@ export const MatchmakerPage: React.FC<MatchmakerPageProps> = ({
               <div key={attendee.id} className="space-y-2">
                 {/* Match Score Reason Header */}
                 <div className="flex items-center justify-between px-2 text-xs">
-                  <span className="font-semibold text-brand-400 flex items-center gap-1">
+                  <span className="font-semibold text-brand-600 dark:text-brand-400 flex items-center gap-1">
                     <Sparkles className="w-3.5 h-3.5" />
                     {matchScore}% Match
                   </span>
-                  <span className="text-[11px] text-slate-400 truncate max-w-[150px] sm:max-w-[220px]">
+                  <span className="text-[11px] text-slate-500 dark:text-slate-400 truncate max-w-[150px] sm:max-w-[220px]">
                     {matchReason}
                   </span>
                 </div>
@@ -129,8 +129,8 @@ export const MatchmakerPage: React.FC<MatchmakerPageProps> = ({
       ) : (
         <div className="text-center py-12 px-4 bg-surface-card border border-surface-border rounded-2xl">
           <Users className="w-8 h-8 text-slate-500 mx-auto mb-2" />
-          <h4 className="text-sm font-semibold text-slate-200">No match candidates found</h4>
-          <p className="text-xs text-slate-400 mt-1 max-w-xs mx-auto">
+          <h4 className="text-sm font-semibold text-slate-900 dark:text-slate-200">No match candidates found</h4>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-xs mx-auto">
             As more attendees join this room with complementary roles, top recommendations will appear here automatically.
           </p>
         </div>
