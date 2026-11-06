@@ -124,12 +124,12 @@ export const CreateRoomPage: React.FC<CreateRoomPageProps> = ({ onRoomCreated })
           <Sparkles className="w-3.5 h-3.5" />
           <span>Real-Time In-Person Event Networking • Zero App Downloads</span>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight">
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
           Create an Event Networking Hall
         </h1>
-        <p className="text-sm sm:text-base text-slate-400 max-w-xl mx-auto leading-relaxed">
+        <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400 max-w-xl mx-auto leading-relaxed">
           Project a live QR code on stage. Attendees scan with their phone camera to onboard in{' '}
-          <span className="text-slate-200 font-semibold">&lt;45 seconds</span>, discover complementary teammates, exchange contact handles, and view live hall activity.
+          <span className="text-slate-900 dark:text-slate-200 font-semibold">&lt;45 seconds</span>, discover complementary teammates, exchange contact handles, and view live hall activity.
         </p>
       </div>
 
@@ -139,11 +139,11 @@ export const CreateRoomPage: React.FC<CreateRoomPageProps> = ({ onRoomCreated })
           <div className="w-7 h-7 rounded-xl bg-brand-500/10 border border-brand-500/30 flex items-center justify-center text-brand-400 font-bold text-xs">
             1
           </div>
-          <h2 className="text-xs font-bold text-slate-200 flex items-center gap-1.5">
+          <h2 className="text-xs font-bold text-slate-900 dark:text-slate-200 flex items-center gap-1.5">
             <QrCode className="w-3.5 h-3.5 text-brand-400" />
             Project QR on Stage
           </h2>
-          <p className="text-xs text-slate-400 leading-relaxed">
+          <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
             Create your room and display the dynamic QR code on screen or venue banners.
           </p>
         </div>
@@ -152,11 +152,11 @@ export const CreateRoomPage: React.FC<CreateRoomPageProps> = ({ onRoomCreated })
           <div className="w-7 h-7 rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-400 font-bold text-xs">
             2
           </div>
-          <h2 className="text-xs font-bold text-slate-200 flex items-center gap-1.5">
+          <h2 className="text-xs font-bold text-slate-900 dark:text-slate-200 flex items-center gap-1.5">
             <Zap className="w-3.5 h-3.5 text-sky-400" />
             &lt;45s Phone Onboard
           </h2>
-          <p className="text-xs text-slate-400 leading-relaxed">
+          <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
             Attendees scan to pick role, skills & intent. Zero app install or account creation.
           </p>
         </div>
@@ -165,11 +165,11 @@ export const CreateRoomPage: React.FC<CreateRoomPageProps> = ({ onRoomCreated })
           <div className="w-7 h-7 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold text-xs">
             3
           </div>
-          <h2 className="text-xs font-bold text-slate-200 flex items-center gap-1.5">
+          <h2 className="text-xs font-bold text-slate-900 dark:text-slate-200 flex items-center gap-1.5">
             <BarChart3 className="w-3.5 h-3.5 text-emerald-400" />
             Connect & Moderate
           </h2>
-          <p className="text-xs text-slate-400 leading-relaxed">
+          <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
             Attendees swap contacts via waves; organizers track live stats & broadcast stage alerts.
           </p>
         </div>
@@ -177,7 +177,7 @@ export const CreateRoomPage: React.FC<CreateRoomPageProps> = ({ onRoomCreated })
 
       {/* QUICK PRESETS BANNER */}
       <div className="p-4 bg-surface-card/60 border border-surface-border/80 rounded-2xl space-y-2">
-        <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider font-mono">
+        <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-mono">
           Quick Start Presets (Click to autofill):
         </span>
         <div className="flex flex-wrap gap-2">
@@ -186,7 +186,7 @@ export const CreateRoomPage: React.FC<CreateRoomPageProps> = ({ onRoomCreated })
               key={preset.label}
               type="button"
               onClick={() => handleApplyPreset(preset)}
-              className="text-xs px-3 py-1.5 bg-surface-raised border border-surface-border hover:border-brand-500/60 hover:bg-brand-500/10 text-slate-200 rounded-xl transition-all"
+              className="text-xs px-3 py-1.5 bg-surface-raised border border-surface-border hover:border-brand-500/60 hover:bg-brand-500/10 text-slate-700 dark:text-slate-200 rounded-xl transition-all"
             >
               {preset.label}
             </button>
@@ -217,7 +217,7 @@ export const CreateRoomPage: React.FC<CreateRoomPageProps> = ({ onRoomCreated })
 
         {/* FORMAT SELECTOR */}
         <div className="space-y-2">
-          <label className="block text-xs font-medium text-slate-300">
+          <label className="block text-xs font-medium text-slate-700 dark:text-slate-300">
             Event Format & Matchmaking Logic *
           </label>
           <div className="grid grid-cols-1 gap-2.5">
@@ -230,14 +230,14 @@ export const CreateRoomPage: React.FC<CreateRoomPageProps> = ({ onRoomCreated })
                   onClick={() => setCategory(cat.id)}
                   className={`min-h-[50px] p-4 rounded-2xl border text-left flex items-start gap-3.5 transition-all select-none ${
                     isSelected
-                      ? 'bg-brand-500/10 border-brand-500 text-slate-100 shadow-emerald'
-                      : 'bg-surface-raised border-surface-border text-slate-300 hover:border-slate-500'
+                      ? 'bg-brand-500/10 border-brand-500 text-slate-900 dark:text-slate-100 shadow-emerald'
+                      : 'bg-surface-raised border-surface-border text-slate-700 dark:text-slate-300 hover:border-slate-500'
                   }`}
                 >
                   <div className="mt-0.5 shrink-0">{cat.icon}</div>
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
-                      <h4 className="text-xs font-bold text-slate-100">{cat.label}</h4>
+                      <h4 className="text-xs font-bold text-slate-900 dark:text-slate-100">{cat.label}</h4>
                       {isSelected && (
                         <span className="text-[10px] px-2 py-0.5 rounded-full bg-brand-500/20 text-brand-300 font-mono">
                           Active

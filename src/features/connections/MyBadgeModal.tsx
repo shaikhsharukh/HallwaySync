@@ -30,11 +30,11 @@ export const MyBadgeModal: React.FC<MyBadgeModalProps> = ({
     <Modal isOpen={isOpen} onClose={onClose} className="text-center">
       <div className="space-y-5">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-surface-raised border border-surface-border rounded-full text-slate-300 text-xs font-semibold mb-2">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-surface-raised border border-surface-border rounded-full text-slate-600 dark:text-slate-300 text-xs font-semibold mb-2">
             <QrCode className="w-3.5 h-3.5 text-brand-400" />
             <span>In-Person Networking Badge</span>
           </div>
-          <h2 className="text-lg font-bold text-slate-100">
+          <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">
             Show to Connect
           </h2>
           <p className="text-xs text-slate-400 mt-0.5">
@@ -51,7 +51,7 @@ export const MyBadgeModal: React.FC<MyBadgeModalProps> = ({
             size="lg"
             className="mb-2"
           />
-          <h3 className="text-base font-bold text-slate-100">{attendee.display_name}</h3>
+          <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">{attendee.display_name}</h3>
           <Badge variant="role" color={roleColor} className="mt-1">
             {attendee.role}
           </Badge>

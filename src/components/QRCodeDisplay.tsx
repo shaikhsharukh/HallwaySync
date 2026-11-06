@@ -52,7 +52,7 @@ export const QRCodeDisplay: React.FC<QRCodeDisplayProps> = ({
 
   return (
     <div className="flex flex-col items-center p-6 bg-surface-card border border-surface-border rounded-3xl shadow-card text-center">
-      {title && <h3 className="text-base font-semibold text-slate-100 mb-1">{title}</h3>}
+      {title && <h3 className="text-base font-semibold text-slate-900 dark:text-slate-100 mb-1">{title}</h3>}
       {subtitle && <p className="text-xs text-slate-400 mb-4">{subtitle}</p>}
 
       {/* High-contrast QR Container */}

@@ -102,19 +102,11 @@ export function useTheme(): UseThemeReturn {
   }, []);
 
   const cycleTheme = useCallback(() => {
-    setThemeState((currentTheme) => {
-      let nextTheme: Theme;
-      if (currentTheme === 'system') {
-        nextTheme = 'light';
-      } else if (currentTheme === 'light') {
-        nextTheme = 'dark';
-      } else {
-        nextTheme = 'system';
-      }
-      setStoredTheme(nextTheme);
-      return nextTheme;
-    });
-  }, []);
+    const nextTheme: Theme =
+      theme === 'system' ? 'light' : theme === 'light' ? 'dark' : 'system';
+    setStoredTheme(nextTheme);
+    setThemeState(nextTheme);
+  }, [theme]);
 
   return {
     theme,
